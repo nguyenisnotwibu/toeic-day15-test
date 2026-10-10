@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 15 Test â Verb Tenses | Tháº§y VÅ© NguyÃªn</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+
+/* Header */
+.header{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1px solid #334155;position:sticky;top:8px;z-index:100;backdrop-filter:blur(10px)}
+.header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.header h1{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,#818cf8,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .sub{font-size:.8rem;color:#94a3b8;margin-top:2px}
+.timer-box{display:flex;align-items:center;gap:8px;background:#1e1b4b;padding:8px 16px;border-radius:12px;font-weight:700;font-size:1.1rem;border:1px solid #4338ca}
+.timer-box.warn{background:#7f1d1d;border-color:#dc2626;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+.timer-icon{font-size:1.2rem}
+.progress-bar{margin-top:12px;background:#1e293b;border-radius:8px;height:6px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#6366f1,#8b5cf6);border-radius:8px;transition:width .3s}
+.progress-text{font-size:.75rem;color:#94a3b8;margin-top:4px;text-align:right}
+
+/* Start screen */
+.start-screen{text-align:center;padding:60px 20px}
+.start-screen h2{font-size:1.8rem;margin-bottom:8px;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.start-screen p{color:#94a3b8;margin-bottom:6px;font-size:.95rem}
+.start-screen .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:400px;margin:24px auto}
+.info-card{background:#1e293b;border-radius:12px;padding:16px;border:1px solid #334155}
+.info-card .num{font-size:1.5rem;font-weight:800;color:#818cf8}
+.info-card .label{font-size:.8rem;color:#94a3b8;margin-top:4px}
+.input-group{max-width:400px;margin:24px auto}
+.input-group input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;font-size:1rem;margin-bottom:8px}
+.input-group input:focus{outline:none;border-color:#6366f1}
+.btn-start{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:14px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:16px;transition:transform .2s}
+.btn-start:hover{transform:scale(1.03)}
+
+/* Question */
+.question-card{background:#1e293b;border-radius:16px;padding:24px;margin-bottom:16px;border:1px solid #334155;transition:border-color .3s}
+.question-card.answered{border-color:#4338ca}
+.question-card.correct{border-color:#22c55e}
+.question-card.wrong{border-color:#ef4444}
+.q-num{display:inline-block;background:#6366f1;color:#fff;font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.q-section{display:inline-block;background:#7c3aed;color:#fff;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:20px;margin-left:6px;margin-bottom:10px}
+.q-text{font-size:1rem;line-height:1.6;margin-bottom:16px;color:#f1f5f9}
+.q-text .blank{color:#818cf8;font-weight:700;border-bottom:2px dashed #6366f1;padding:0 4px}
+.options{display:grid;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid #334155;cursor:pointer;transition:all .2s;background:#0f172a}
+.opt:hover{border-color:#6366f1;background:#1e1b4b}
+.opt.selected{border-color:#6366f1;background:#1e1b4b}
+.opt.correct-answer{border-color:#22c55e;background:#052e16}
+.opt.wrong-answer{border-color:#ef4444;background:#450a0a}
+.opt-letter{min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#334155;font-weight:700;font-size:.8rem;flex-shrink:0}
+.opt.selected .opt-letter{background:#6366f1;color:#fff}
+.opt.correct-answer .opt-letter{background:#22c55e;color:#fff}
+.opt.wrong-answer .opt-letter{background:#ef4444;color:#fff}
+.opt-text{font-size:.95rem;line-height:1.4;padding-top:3px}
+.opt[disabled]{pointer-events:none;opacity:.7}
+
+
+/* Submit / Result */
+.btn-submit{display:block;width:100%;padding:16px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:14px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:20px;transition:transform .2s}
+.btn-submit:hover{transform:scale(1.02)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.result-screen{text-align:center;padding:40px 20px}
+.score-circle{width:160px;height:160px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;border:6px solid}
+.score-circle.excellent{border-color:#22c55e;background:#052e16}
+.score-circle.good{border-color:#eab308;background:#422006}
+.score-circle.fail{border-color:#ef4444;background:#450a0a}
+.score-num{font-size:2.5rem;font-weight:800}
+.score-label{font-size:.85rem;color:#94a3b8}
+.result-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;max-width:500px;margin:20px auto}
+.stat{background:#1e293b;border-radius:12px;padding:14px;border:1px solid #334155}
+.stat .val{font-size:1.3rem;font-weight:700}
+.stat .lbl{font-size:.75rem;color:#94a3b8;margin-top:2px}
+.stat.green .val{color:#22c55e}
+.stat.red .val{color:#ef4444}
+.stat.blue .val{color:#818cf8}
+.btn-review{background:#334155;color:#e2e8f0;border:none;padding:12px 32px;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:20px}
+.explanation{background:#1e1b4b;border-radius:8px;padding:12px;margin-top:12px;font-size:.85rem;line-height:1.5;color:#c4b5fd;display:none}
+.show-exp .explanation{display:block}
+
+.hidden{display:none}
+@media(max-width:600px){.container{padding:10px}.header h1{font-size:1rem}.q-text{font-size:.92rem}}
+</style>
+</head>
+<body>
+
+<div class="container" id="app">
+  <!-- Start Screen -->
+  <div id="s-start" class="start-screen">
+    <h2>DAY 15 â TEST</h2>
+    <p>Verb Tenses (9 ThÃ¬)</p>
+    <p style="color:#64748b;font-size:.85rem">Tháº§y VÅ© NguyÃªn â TOEIC Course</p>
+    <div class="info-grid">
+      <div class="info-card"><div class="num">35</div><div class="label">CÃ¢u há»i</div></div>
+      <div class="info-card"><div class="num">30</div><div class="label">PhÃºt</div></div>
+      <div class="info-card"><div class="num">3</div><div class="label">Pháº§n</div></div>
+      <div class="info-card"><div class="num">10</div><div class="label">Äiá»m tá»i Äa</div></div>
+    </div>
+    <div class="input-group">
+      <input type="text" id="i-name" placeholder="Há» vÃ  tÃªn">
+      <input type="text" id="i-class" placeholder="Lá»p">
+    </div>
+    <button class="btn-start" onclick="startTest()">Báº¯t Äáº§u lÃ m bÃ i</button>
+  </div>
+
+  <!-- Test Screen -->
+  <div id="s-test" class="hidden">
+    <div class="header" id="hdr">
+      <div class="header-top">
+        <div>
+          <h1>Day 15 â Verb Tenses (9 ThÃ¬)</h1>
+          <div class="sub" id="student-info"></div>
+        </div>
+        <div class="timer-box" id="timer-box">
+          <span class="timer-icon">&#9202;</span>
+          <span id="timer">30:00</span>
+        </div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="progress-text" id="prog-text">0/35 cÃ¢u ÄÃ£ tráº£ lá»i</div>
+    </div>
+
+    <div id="questions"></div>
+
+    <button class="btn-submit" id="btn-submit" onclick="submitTest()">Ná»p bÃ i</button>
+  </div>
+
+  <!-- Result Screen -->
+  <div id="s-result" class="hidden"></div>
+</div>
+
+<script>
+var QUESTIONS = [
+  // ===== PHáº¦N 1: LÃ THUYáº¾T NGá»® PHÃP (10 cÃ¢u) =====
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>hiá»n táº¡i ÄÆ¡n</b> (chá»§ ngá»¯ sá» Ã­t) lÃ :",opts:["S + V(bare)","S + V(s/es)","S + am/is/are + Ving","S + have/has + Vpp"],ans:1,exp:"HTÄ: S(sá» Ã­t) + V(s/es). VD: He works every day."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>quÃ¡ khá»© hoÃ n thÃ nh</b> lÃ :",opts:["S + have/has + Vpp","S + had + Vpp","S + was/were + Ving","S + Ved/V2"],ans:1,exp:"QKHT: S + had + Vpp. VD: I had eaten before I came here."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"Dáº¥u hiá»u nÃ o <b>KHÃNG</b> pháº£i cá»§a thÃ¬ hiá»n táº¡i hoÃ n thÃ nh?",opts:["since","for","yesterday","recently"],ans:2,exp:"'Yesterday' lÃ  dáº¥u hiá»u cá»§a thÃ¬ quÃ¡ khá»© ÄÆ¡n. HTHT dÃ¹ng: since, for, already, yet, just, recently, so far..."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"Trong cÃ¢u cÃ³ má»nh Äá» tráº¡ng ngá»¯ thá»i gian (when, as soon as, before...), <b>má»nh Äá» chÃ­nh</b> chia thÃ¬ gÃ¬?",opts:["Hiá»n táº¡i ÄÆ¡n","TÆ°Æ¡ng lai ÄÆ¡n (will + V)","QuÃ¡ khá»© ÄÆ¡n","Hiá»n táº¡i hoÃ n thÃ nh"],ans:1,exp:"MÄ chÃ­nh â tÆ°Æ¡ng lai ÄÆ¡n (will + V). MÄ tráº¡ng ngá»¯ â hiá»n táº¡i ÄÆ¡n. VD: I will be happy when I get 900 TOEIC."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"\"Be going to + V\" dÃ¹ng Äá» diá»n táº£:",opts:["HÃ nh Äá»ng khÃ´ng cÃ³ káº¿ hoáº¡ch, phÃ¡t sinh táº¡i chá»","HÃ nh Äá»ng CÃ Káº¾ HOáº CH, CÃ Dá»° Äá»NH tá»« trÆ°á»c","HÃ nh Äá»ng Äang xáº£y ra á» hiá»n táº¡i","HÃ nh Äá»ng ÄÃ£ hoÃ n thÃ nh trong quÃ¡ khá»©"],ans:1,exp:"'Be going to' â cÃ³ káº¿ hoáº¡ch/dá»± Äá»nh. 'Will' â khÃ´ng cÃ³ káº¿ hoáº¡ch, quyáº¿t Äá»nh táº¡i thá»i Äiá»m nÃ³i."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>tÆ°Æ¡ng lai hoÃ n thÃ nh</b> lÃ :",opts:["S + will + V","S + will be + Ving","S + will have + Vpp","S + have/has + Vpp"],ans:2,exp:"TLHT: S + will have + Vpp. VD: By next month, I will have finished the project."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"\"By the time\" lÃ  dáº¥u hiá»u cá»§a thÃ¬ nÃ o?",opts:["Hiá»n táº¡i hoÃ n thÃ nh","QuÃ¡ khá»© hoÃ n thÃ nh / TÆ°Æ¡ng lai hoÃ n thÃ nh","Hiá»n táº¡i tiáº¿p diá»n","QuÃ¡ khá»© ÄÆ¡n"],ans:1,exp:"'By the time' + má»nh Äá» â dáº¥u hiá»u QKHT hoáº·c TLHT. VD: I had eaten by the time she arrived."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"ThÃ¬ <b>hiá»n táº¡i tiáº¿p diá»n</b> ngoÃ i diá»n táº£ hÃ nh Äá»ng Äang xáº£y ra, cÃ²n dÃ¹ng Äá»:",opts:["Diá»n táº£ hÃ nh Äá»ng ÄÃ£ hoÃ n thÃ nh","Diá»n táº£ thÃ³i quen","Diá»n táº£ hÃ nh Äá»ng ÄÃ£ ÄÆ°á»£c lÃªn káº¿ hoáº¡ch tá»« trÆ°á»c","Diá»n táº£ hÃ nh Äá»ng xáº£y ra trong quÃ¡ khá»¯ xa"],ans:2,exp:"HTTD cÃ²n diá»n táº£ hÃ nh Äá»ng ÄÃ£ lÃªn káº¿ hoáº¡ch. VD: My boss is travelling to Australia next month."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"Dáº¥u hiá»u \"every day, usually, often, always\" thuá»c thÃ¬ nÃ o?",opts:["Hiá»n táº¡i ÄÆ¡n","Hiá»n táº¡i tiáº¿p diá»n","QuÃ¡ khá»© ÄÆ¡n","Hiá»n táº¡i hoÃ n thÃ nh"],ans:0,exp:"Every day, usually, often, always â dáº¥u hiá»u thÃ¬ hiá»n táº¡i ÄÆ¡n (thÃ³i quen, sá»± tháº­t)."},
+  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>quÃ¡ khá»© tiáº¿p diá»n</b> lÃ :",opts:["S + Ved/V2","S + was/were + Ving","S + had + Vpp","S + have/has + Vpp"],ans:1,exp:"QKTD: S + was/were + Ving. VD: They were working when I arrived."},
+
+  // ===== PHáº¦N 2: CHá»N Dáº NG ÄÃNG Cá»¦A Äá»NG Tá»ª (15 cÃ¢u) =====
+  {section:"Chia Äá»ng tá»«",q:"The traffic lights _______ working last night because of the heavy snow.",opts:["stop","stops","stopped","to stop"],ans:2,exp:"'Last night' â quÃ¡ khá»¯ ÄÆ¡n â stopped."},
+  {section:"Chia Äá»ng tá»«",q:"The department usually _______ with customer complaints related to our products.",opts:["deal","deals","dealt","will deal"],ans:1,exp:"'Usually' + chá»§ ngá»¯ 'The department' (sá» Ã­t) â HTÄ â deals."},
+  {section:"Chia Äá»ng tá»«",q:"Officials will conduct a press conference as soon as they _______ more information.",opts:["gathers","gather","will gather","gathered"],ans:1,exp:"Má»nh Äá» tráº¡ng ngá»¯ (as soon as) â chia HTÄ. Chá»§ ngá»¯ 'they' â gather."},
+  {section:"Chia Äá»ng tá»«",q:"The director will be very satisfied when she _______ her plans.",opts:["will present","have present","presenting","presents"],ans:3,exp:"MÄ tráº¡ng ngá»¯ (when) â HTÄ. Chá»§ ngá»¯ 'she' (sá» Ã­t) â presents."},
+  {section:"Chia Äá»ng tá»«",q:"Simpson Manufacturing _______ seasonal workers for its new product line.",opts:["hire","hires","is hiring","hired"],ans:2,exp:"HÃ nh Äá»ng Äang xáº£y ra á» hiá»n táº¡i â HTTD â is hiring."},
+  {section:"Chia Äá»ng tá»«",q:"Daily guided tours of the National Museum _______ at 2 P.M on the second floor.",opts:["begin","begins","is beginning","began"],ans:0,exp:"Lá»ch trÃ¬nh cá» Äá»nh â HTÄ. Chá»§ ngá»¯ 'tours' (sá» nhiá»u) â begin."},
+  {section:"Chia Äá»ng tá»«",q:"The factory's productivity _______ since the introduction of the new manufacturing system.",opts:["improves","improved","has improved","had improved"],ans:2,exp:"'Since' â dáº¥u hiá»u HTHT â has improved."},
+  {section:"Chia Äá»ng tá»«",q:"Fashion, Inc. _______ the order before Ms. Chu requested that it be canceled.",opts:["already ships","is already shipping","had already shipped","will already ship"],ans:2,exp:"HÃ nh Äá»ng xáº£y ra TRÆ¯á»C quÃ¡ khá»¯ (before Ms. Chu requested) â QKHT â had already shipped."},
+  {section:"Chia Äá»ng tá»«",q:"The researchers _______ hard to develop a perfect new model over the last 2 years.",opts:["work","worked","are working","have been working"],ans:3,exp:"'Over the last 2 years' â HTHT tiáº¿p diá»n â have been working."},
+  {section:"Chia Äá»ng tá»«",q:"The city council _______ to increase funding for community sports facilities.",opts:["to decide","are deciding","to have decided","has decided"],ans:3,exp:"'The city council' (sá» Ã­t) + hÃ nh Äá»ng ÄÃ£ xáº£y ra â HTHT â has decided."},
+  {section:"Chia Äá»ng tá»«",q:"Last month, the coordinator _______ all the supervisors of the changes in policy.",opts:["inform","informs","informed","has informed"],ans:2,exp:"'Last month' â quÃ¡ khá»¯ ÄÆ¡n â informed."},
+  {section:"Chia Äá»ng tá»«",q:"The only grocery store in this town is temporarily closed because it _______ a renovation.",opts:["undergo","is undergoing","have undergone","will have undergone"],ans:1,exp:"HÃ nh Äá»ng Äang diá»n ra á» hiá»n táº¡i â HTTD â is undergoing."},
+  {section:"Chia Äá»ng tá»«",q:"By the end of this year, the Personnel manager _______ the employee reviews.",opts:["completes","completed","will complete","will have completed"],ans:3,exp:"'By the end of this year' â TLHT â will have completed."},
+  {section:"Chia Äá»ng tá»«",q:"Currently, MNH Co. _______ for producers for its New York station.",opts:["looks","looked","is looking","had looked"],ans:2,exp:"'Currently' â HTTD â is looking."},
+  {section:"Chia Äá»ng tá»«",q:"This commercial _______ a lot of new customers since its release last January.",opts:["attracts","will attract","have attracted","has attracted"],ans:3,exp:"'Since' â HTHT. 'This commercial' (sá» Ã­t) â has attracted."},
+
+  // ===== PHáº¦N 3: Tá»ª Vá»°NG (10 cÃ¢u) =====
+  {section:"Tá»« vá»±ng",q:"\"state-of-the-art\" cÃ³ nghÄ©a lÃ :",opts:["Thuá»c vá» nghá» thuáº­t","Hiá»n Äáº¡i nháº¥t, tá»i tÃ¢n","Cá» Äiá»n, truyá»n thá»ng","Äáº¯t tiá»n, xa xá»"],ans:1,exp:"state-of-the-art (adj) = hiá»n Äáº¡i nháº¥t, tá»i tÃ¢n. VD: state-of-the-art equipment."},
+  {section:"Tá»« vá»±ng",q:"\"undergo\" cÃ³ nghÄ©a lÃ :",opts:["Äi phÃ­a dÆ°á»i","Tráº£i qua, chá»u Äá»±ng","Hiá»u rÃµ","KÃ¹ káº¿t há»£p Äá»ng"],ans:1,exp:"undergo (v) = tráº£i qua. VD: The store is undergoing a renovation."},
+  {section:"Tá»« vá»±ng",q:"\"fulfill\" cÃ³ nghÄ©a lÃ :",opts:["Äiá»n vÃ o Äáº§y Äá»§","HoÃ n thÃ nh, ÄÃ¡p á»©ng","Cáº£m tháº¥y thoáº£i mÃ¡i","Tháº¥t báº¡i náº·ng ná»"],ans:1,exp:"fulfill (v) = hoÃ n thÃ nh, ÄÃ¡p á»©ng. VD: Please let me know if you can fulfill my requests."},
+  {section:"Tá»« vá»±ng",q:"\"funding\" cÃ³ nghÄ©a lÃ :",opts:["Ná»n táº£ng cÆ¡ sá»","Quá»¹, nguá»n tÃ i trá»£","Sá»± phÃ¡t hiá»n","Niá»m vui thÃº"],ans:1,exp:"funding (n) = quá»¹, nguá»n tÃ i trá»£. VD: increase funding for sports facilities."},
+  {section:"Tá»« vá»±ng",q:"\"transfer\" trong ngá»¯ cáº£nh cÃ´ng viá»c cÃ³ nghÄ©a lÃ :",opts:["Chuyá»n tiá»n ngÃ¢n hÃ ng","Chuyá»n cÃ´ng tÃ¡c","Váº­n chuyá»n hÃ ng hÃ³a","PhiÃªn dá»ch tÃ i liá»u"],ans:1,exp:"transfer (v) = chuyá»n cÃ´ng tÃ¡c. VD: Ms. Cole will be transferred to the London headquarters."},
+  {section:"Tá»« vá»±ng",q:"\"productivity\" cÃ³ nghÄ©a lÃ :",opts:["Sáº£n pháº©m","NÄng suáº¥t","Sá»± sáº£n xuáº¥t","Lá»£i nhuáº­n"],ans:1,exp:"productivity (n) = nÄng suáº¥t. VD: The factory's productivity has improved."},
+  {section:"Tá»« vá»±ng",q:"\"drastically\" cÃ³ nghÄ©a lÃ :",opts:["Tá»« tá»«, cháº­m rÃ£i","Máº¡nh máº½, ÄÃ¡ng ká»","Nháº¹ nhÃ ng, tinh táº¿","ThÆ°á»ng xuyÃªn"],ans:1,exp:"drastically (adv) = máº¡nh máº½, ÄÃ¡ng ká». VD: Sales have drastically increased."},
+  {section:"Tá»« vá»±ng",q:"\"promising\" cÃ³ nghÄ©a lÃ :",opts:["Há»©a háº¹n, cam káº¿t","Äáº§y há»©a háº¹n, triá»n vá»ng","ÄÃ¡ng tháº¥t vá»ng","Äang báº­n rá»n"],ans:1,exp:"promising (adj) = Äáº§y há»©a háº¹n. VD: She is a promising young employee."},
+  {section:"Tá»« vá»±ng",q:"\"conduct\" cÃ³ nghÄ©a lÃ :",opts:["Chá» huy dÃ n nháº¡c","Tiáº¿n hÃ nh, thá»±c hiá»n","Dáº«n Äiá»n","HÃ nh vi xáº¥u"],ans:1,exp:"conduct (v) = tiáº¿n hÃ nh, thá»±c hiá»n. VD: Officials will conduct a press conference."},
+  {section:"Tá»« vá»±ng",q:"\"opening\" trong ngá»¯ cáº£nh tuyá»n dá»¥ng cÃ³ nghÄ©a lÃ :",opts:["Buá»i khai trÆ°Æ¡ng","Vá» trÃ­ Äang tuyá»n","Lá» há»ng, khe há»","CÆ¡ há»i Äáº§u tÆ°"],ans:1,exp:"opening (n) = vá» trÃ­ tuyá»n dá»¥ng Äang má». VD: We have an opening for a technical support representative."}
+];
+
+var studentName='',studentClass='',answers=[],timerInterval,timeLeft=30*60,testStarted=false;
+
+function startTest(){
+  studentName=document.getElementById('i-name').value.trim();
+  studentClass=document.getElementById('i-class').value.trim();
+  if(!studentName){alert('Vui lÃ²ng nháº­p há» tÃªn!');return}
+  document.getElementById('s-start').classList.add('hidden');
+  document.getElementById('s-test').classList.remove('hidden');
+  document.getElementById('student-info').textContent=studentName+(studentClass?' â '+studentClass:'');
+  answers=new Array(QUESTIONS.length).fill(-1);
+  renderQuestions();
+  startTimer();
+  testStarted=true;
+}
+
+function renderQuestions(){
+  var html='';
+  var lastSection='';
+  QUESTIONS.forEach(function(q,i){
+    if(q.section!==lastSection){
+      lastSection=q.section;
+      var sectionTitle='';
+      if(q.section==='LÃ½ thuyáº¿t ngá»¯ phÃ¡p') sectionTitle='PHáº¦N 1: LÃ THUYáº¾T NGá»® PHÃP (10 cÃ¢u)';
+      else if(q.section==='Chia Äá»ng tá»«') sectionTitle='PHáº¦N 2: CHá»N Dáº NG ÄÃNG Cá»¦A Äá»NG Tá»ª (15 cÃ¢u)';
+      else if(q.section==='Tá»« vá»±ng') sectionTitle='PHáº¦N 3: Tá»ª Vá»°NG (10 cÃ¢u)';
+      html+='<div style="margin:28px 0 16px;padding:12px 16px;background:linear-gradient(135deg,#312e81,#4c1d95);border-radius:12px;font-weight:700;font-size:.95rem">'+sectionTitle+'</div>';
+    }
+
+    var letters=['A','B','C','D'];
+    html+='<div class="question-card" id="qc-'+i+'">'
+      +'<span class="q-num">CÃ¢u '+(i+1)+'</span>'
+      +'<span class="q-section">'+q.section+'</span>'
+      +'<div class="q-text">'+q.q+'</div>'
+      +'<div class="options">';
+    q.opts.forEach(function(o,j){
+      html+='<div class="opt" id="opt-'+i+'-'+j+'" onclick="selectAnswer('+i+','+j+')">'
+        +'<div class="opt-letter">'+letters[j]+'</div>'
+        +'<div class="opt-text">'+o+'</div></div>';
+    });
+    html+='</div>'
+      +'<div class="explanation" id="exp-'+i+'">'+q.exp+'</div>'
+      +'</div>';
+  });
+  document.getElementById('questions').innerHTML=html;
+}
+
+function selectAnswer(qi,oi){
+  if(!testStarted) return;
+  // Clear previous
+  for(var j=0;j<4;j++){
+    var el=document.getElementById('opt-'+qi+'-'+j);
+    if(el) el.classList.remove('selected');
+  }
+  document.getElementById('opt-'+qi+'-'+oi).classList.add('selected');
+  document.getElementById('qc-'+qi).classList.add('answered');
+  answers[qi]=oi;
+  updateProgress();
+}
+
+function updateProgress(){
+  var answered=answers.filter(function(a){return a>=0}).length;
+  var pct=Math.round(answered/QUESTIONS.length*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=answered+'/'+QUESTIONS.length+' cÃ¢u ÄÃ£ tráº£ lá»i';
+}
+
+function startTimer(){
+  timerInterval=setInterval(function(){
+    timeLeft--;
+    if(timeLeft<=0){clearInterval(timerInterval);submitTest();return}
+    var m=Math.floor(timeLeft/60);
+    var s=timeLeft%60;
+    document.getElementById('timer').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+    if(timeLeft<=300) document.getElementById('timer-box').classList.add('warn');
+  },1000);
+}
+
+function submitTest(){
+  if(!testStarted) return;
+  var unanswered=answers.filter(function(a){return a<0}).length;
+  if(unanswered>0 && timeLeft>0){
+    if(!confirm('Báº¡n cÃ²n '+unanswered+' cÃ¢u chÆ°a tráº£ lá»i. Ná»p bÃ i?')) return;
+  }
+  clearInterval(timerInterval);
+  testStarted=false;
+
+  var correct=0,wrong=0,skipped=0;
+  QUESTIONS.forEach(function(q,i){
+    var card=document.getElementById('qc-'+i);
+    if(answers[i]<0){skipped++;return}
+    if(answers[i]===q.ans){
+      correct++;
+      card.classList.add('correct','show-exp');
+      document.getElementById('opt-'+i+'-'+q.ans).classList.add('correct-answer');
+    } else {
+      wrong++;
+      card.classList.add('wrong','show-exp');
+      document.getElementById('opt-'+i+'-'+answers[i]).classList.add('wrong-answer');
+      document.getElementById('opt-'+i+'-'+q.ans).classList.add('correct-answer');
+    }
+    // Disable all options
+    for(var j=0;j<4;j++){
+      var el=document.getElementById('opt-'+i+'-'+j);
+      if(el) el.setAttribute('disabled','true');
+      el.style.pointerEvents='none';
+    }
+  });
+
+  var score=(correct/QUESTIONS.length*10).toFixed(1);
+  var timeUsed=30*60-timeLeft;
+  var mUsed=Math.floor(timeUsed/60);
+  var sUsed=timeUsed%60;
+  var grade=score>=8?'excellent':score>=5?'good':'fail';
+
+  // Show result banner
+  var resultHTML='<div class="result-screen">'
+    +'<h2 style="font-size:1.5rem;margin-bottom:16px">Káº¿t quáº£ bÃ i test</h2>'
+    +'<div class="score-circle '+grade+'">'
+    +'<div class="score-num">'+score+'</div>'
+    +'<div class="score-label">/ 10 Äiá»m</div></div>'
+    +'<p style="font-size:1.1rem;margin-bottom:4px">'+studentName+(studentClass?' â '+studentClass:'')+'</p>'
+    +'<p style="color:#94a3b8;font-size:.85rem">Thá»i gian: '+mUsed+' phÃºt '+sUsed+' giÃ¢y</p>'
+    +'<div class="result-stats">'
+    +'<div class="stat green"><div class="val">'+correct+'</div><div class="lbl">ÄÃºng</div></div>'
+    +'<div class="stat red"><div class="val">'+wrong+'</div><div class="lbl">Sai</div></div>'
+    +'<div class="stat blue"><div class="val">'+skipped+'</div><div class="lbl">Bá» qua</div></div>'
+    +'</div>'
+    +'<button class="btn-review" onclick="scrollToReview()">Xem láº¡i bÃ i lÃ m &#8595;</button>'
+    +'</div>';
+  document.getElementById('s-result').innerHTML=resultHTML;
+  document.getElementById('s-result').classList.remove('hidden');
+  document.getElementById('btn-submit').classList.add('hidden');
+
+  // Scroll to top
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function scrollToReview(){
+  document.getElementById('questions').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
