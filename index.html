@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 15 Test â Verb Tenses | Tháº§y VÅ© NguyÃªn</title>
+<title>Day 15 Test — Verb Tenses | Thầy Vũ Nguyên</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
@@ -58,7 +58,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172
 .opt-text{font-size:.95rem;line-height:1.4;padding-top:3px}
 .opt[disabled]{pointer-events:none;opacity:.7}
 
-
 /* Submit / Result */
 .btn-submit{display:block;width:100%;padding:16px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:14px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:20px;transition:transform .2s}
 .btn-submit:hover{transform:scale(1.02)}
@@ -91,20 +90,20 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172
 <div class="container" id="app">
   <!-- Start Screen -->
   <div id="s-start" class="start-screen">
-    <h2>DAY 15 â TEST</h2>
-    <p>Verb Tenses (9 ThÃ¬)</p>
-    <p style="color:#64748b;font-size:.85rem">Tháº§y VÅ© NguyÃªn â TOEIC Course</p>
+    <h2>DAY 15 — TEST</h2>
+    <p>Verb Tenses (9 Thì)</p>
+    <p style="color:#64748b;font-size:.85rem">Thầy Vũ Nguyên — TOEIC Course</p>
     <div class="info-grid">
-      <div class="info-card"><div class="num">35</div><div class="label">CÃ¢u há»i</div></div>
-      <div class="info-card"><div class="num">30</div><div class="label">PhÃºt</div></div>
-      <div class="info-card"><div class="num">3</div><div class="label">Pháº§n</div></div>
-      <div class="info-card"><div class="num">10</div><div class="label">Äiá»m tá»i Äa</div></div>
+      <div class="info-card"><div class="num">35</div><div class="label">Câu hỏi</div></div>
+      <div class="info-card"><div class="num">30</div><div class="label">Phút</div></div>
+      <div class="info-card"><div class="num">3</div><div class="label">Phần</div></div>
+      <div class="info-card"><div class="num">10</div><div class="label">Điểm tối đa</div></div>
     </div>
     <div class="input-group">
-      <input type="text" id="i-name" placeholder="Há» vÃ  tÃªn">
-      <input type="text" id="i-class" placeholder="Lá»p">
+      <input type="text" id="i-name" placeholder="Họ và tên">
+      <input type="text" id="i-class" placeholder="Lớp">
     </div>
-    <button class="btn-start" onclick="startTest()">Báº¯t Äáº§u lÃ m bÃ i</button>
+    <button class="btn-start" onclick="startTest()">Bắt đầu làm bài</button>
   </div>
 
   <!-- Test Screen -->
@@ -112,7 +111,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172
     <div class="header" id="hdr">
       <div class="header-top">
         <div>
-          <h1>Day 15 â Verb Tenses (9 ThÃ¬)</h1>
+          <h1>Day 15 — Verb Tenses (9 Thì)</h1>
           <div class="sub" id="student-info"></div>
         </div>
         <div class="timer-box" id="timer-box">
@@ -121,12 +120,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172
         </div>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-      <div class="progress-text" id="prog-text">0/35 cÃ¢u ÄÃ£ tráº£ lá»i</div>
+      <div class="progress-text" id="prog-text">0/35 câu đã trả lời</div>
     </div>
 
     <div id="questions"></div>
 
-    <button class="btn-submit" id="btn-submit" onclick="submitTest()">Ná»p bÃ i</button>
+    <button class="btn-submit" id="btn-submit" onclick="submitTest()">Nộp bài</button>
   </div>
 
   <!-- Result Screen -->
@@ -135,46 +134,46 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172
 
 <script>
 var QUESTIONS = [
-  // ===== PHáº¦N 1: LÃ THUYáº¾T NGá»® PHÃP (10 cÃ¢u) =====
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>hiá»n táº¡i ÄÆ¡n</b> (chá»§ ngá»¯ sá» Ã­t) lÃ :",opts:["S + V(bare)","S + V(s/es)","S + am/is/are + Ving","S + have/has + Vpp"],ans:1,exp:"HTÄ: S(sá» Ã­t) + V(s/es). VD: He works every day."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>quÃ¡ khá»© hoÃ n thÃ nh</b> lÃ :",opts:["S + have/has + Vpp","S + had + Vpp","S + was/were + Ving","S + Ved/V2"],ans:1,exp:"QKHT: S + had + Vpp. VD: I had eaten before I came here."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"Dáº¥u hiá»u nÃ o <b>KHÃNG</b> pháº£i cá»§a thÃ¬ hiá»n táº¡i hoÃ n thÃ nh?",opts:["since","for","yesterday","recently"],ans:2,exp:"'Yesterday' lÃ  dáº¥u hiá»u cá»§a thÃ¬ quÃ¡ khá»© ÄÆ¡n. HTHT dÃ¹ng: since, for, already, yet, just, recently, so far..."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"Trong cÃ¢u cÃ³ má»nh Äá» tráº¡ng ngá»¯ thá»i gian (when, as soon as, before...), <b>má»nh Äá» chÃ­nh</b> chia thÃ¬ gÃ¬?",opts:["Hiá»n táº¡i ÄÆ¡n","TÆ°Æ¡ng lai ÄÆ¡n (will + V)","QuÃ¡ khá»© ÄÆ¡n","Hiá»n táº¡i hoÃ n thÃ nh"],ans:1,exp:"MÄ chÃ­nh â tÆ°Æ¡ng lai ÄÆ¡n (will + V). MÄ tráº¡ng ngá»¯ â hiá»n táº¡i ÄÆ¡n. VD: I will be happy when I get 900 TOEIC."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"\"Be going to + V\" dÃ¹ng Äá» diá»n táº£:",opts:["HÃ nh Äá»ng khÃ´ng cÃ³ káº¿ hoáº¡ch, phÃ¡t sinh táº¡i chá»","HÃ nh Äá»ng CÃ Káº¾ HOáº CH, CÃ Dá»° Äá»NH tá»« trÆ°á»c","HÃ nh Äá»ng Äang xáº£y ra á» hiá»n táº¡i","HÃ nh Äá»ng ÄÃ£ hoÃ n thÃ nh trong quÃ¡ khá»©"],ans:1,exp:"'Be going to' â cÃ³ káº¿ hoáº¡ch/dá»± Äá»nh. 'Will' â khÃ´ng cÃ³ káº¿ hoáº¡ch, quyáº¿t Äá»nh táº¡i thá»i Äiá»m nÃ³i."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>tÆ°Æ¡ng lai hoÃ n thÃ nh</b> lÃ :",opts:["S + will + V","S + will be + Ving","S + will have + Vpp","S + have/has + Vpp"],ans:2,exp:"TLHT: S + will have + Vpp. VD: By next month, I will have finished the project."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"\"By the time\" lÃ  dáº¥u hiá»u cá»§a thÃ¬ nÃ o?",opts:["Hiá»n táº¡i hoÃ n thÃ nh","QuÃ¡ khá»© hoÃ n thÃ nh / TÆ°Æ¡ng lai hoÃ n thÃ nh","Hiá»n táº¡i tiáº¿p diá»n","QuÃ¡ khá»© ÄÆ¡n"],ans:1,exp:"'By the time' + má»nh Äá» â dáº¥u hiá»u QKHT hoáº·c TLHT. VD: I had eaten by the time she arrived."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"ThÃ¬ <b>hiá»n táº¡i tiáº¿p diá»n</b> ngoÃ i diá»n táº£ hÃ nh Äá»ng Äang xáº£y ra, cÃ²n dÃ¹ng Äá»:",opts:["Diá»n táº£ hÃ nh Äá»ng ÄÃ£ hoÃ n thÃ nh","Diá»n táº£ thÃ³i quen","Diá»n táº£ hÃ nh Äá»ng ÄÃ£ ÄÆ°á»£c lÃªn káº¿ hoáº¡ch tá»« trÆ°á»c","Diá»n táº£ hÃ nh Äá»ng xáº£y ra trong quÃ¡ khá»¯ xa"],ans:2,exp:"HTTD cÃ²n diá»n táº£ hÃ nh Äá»ng ÄÃ£ lÃªn káº¿ hoáº¡ch. VD: My boss is travelling to Australia next month."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"Dáº¥u hiá»u \"every day, usually, often, always\" thuá»c thÃ¬ nÃ o?",opts:["Hiá»n táº¡i ÄÆ¡n","Hiá»n táº¡i tiáº¿p diá»n","QuÃ¡ khá»© ÄÆ¡n","Hiá»n táº¡i hoÃ n thÃ nh"],ans:0,exp:"Every day, usually, often, always â dáº¥u hiá»u thÃ¬ hiá»n táº¡i ÄÆ¡n (thÃ³i quen, sá»± tháº­t)."},
-  {section:"LÃ½ thuyáº¿t ngá»¯ phÃ¡p",q:"CÃ´ng thá»©c thÃ¬ <b>quÃ¡ khá»© tiáº¿p diá»n</b> lÃ :",opts:["S + Ved/V2","S + was/were + Ving","S + had + Vpp","S + have/has + Vpp"],ans:1,exp:"QKTD: S + was/were + Ving. VD: They were working when I arrived."},
+  // ===== PHẦN 1: LÝ THUYẾT NGỮ PHÁP (10 câu) =====
+  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>hiện tại đơn</b> (chủ ngữ số ít) là:",opts:["S + V(bare)","S + V(s/es)","S + am/is/are + Ving","S + have/has + Vpp"],ans:1,exp:"HTĐ: S(số ít) + V(s/es). VD: He works every day."},
+  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>quá khứ hoàn thành</b> là:",opts:["S + have/has + Vpp","S + had + Vpp","S + was/were + Ving","S + Ved/V2"],ans:1,exp:"QKHT: S + had + Vpp. VD: I had eaten before I came here."},
+  {section:"Lý thuyết ngữ pháp",q:"Dấu hiệu nào <b>KHÔNG</b> phải của thì hiện tại hoàn thành?",opts:["since","for","yesterday","recently"],ans:2,exp:"'Yesterday' là dấu hiệu của thì quá khứ đơn. HTHT dùng: since, for, already, yet, just, recently, so far..."},
+  {section:"Lý thuyết ngữ pháp",q:"Trong câu có mệnh đề trạng ngữ thời gian (when, as soon as, before...), <b>mệnh đề chính</b> chia thì gì?",opts:["Hiện tại đơn","Tương lai đơn (will + V)","Quá khứ đơn","Hiện tại hoàn thành"],ans:1,exp:"MĐ chính → tương lai đơn (will + V). MĐ trạng ngữ → hiện tại đơn. VD: I will be happy when I get 900 TOEIC."},
+  {section:"Lý thuyết ngữ pháp",q:"\"Be going to + V\" dùng để diễn tả:",opts:["Hành động không có kế hoạch, phát sinh tại chỗ","Hành động CÓ KẾ HOẠCH, CÓ DỰ ĐỊNH từ trước","Hành động đang xảy ra ở hiện tại","Hành động đã hoàn thành trong quá khứ"],ans:1,exp:"'Be going to' → có kế hoạch/dự định. 'Will' → không có kế hoạch, quyết định tại thời điểm nói."},
+  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>tương lai hoàn thành</b> là:",opts:["S + will + V","S + will be + Ving","S + will have + Vpp","S + have/has + Vpp"],ans:2,exp:"TLHT: S + will have + Vpp. VD: By next month, I will have finished the project."},
+  {section:"Lý thuyết ngữ pháp",q:"\"By the time\" là dấu hiệu của thì nào?",opts:["Hiện tại hoàn thành","Quá khứ hoàn thành / Tương lai hoàn thành","Hiện tại tiếp diễn","Quá khứ đơn"],ans:1,exp:"'By the time' + mệnh đề → dấu hiệu QKHT hoặc TLHT. VD: I had eaten by the time she arrived."},
+  {section:"Lý thuyết ngữ pháp",q:"Thì <b>hiện tại tiếp diễn</b> ngoài diễn tả hành động đang xảy ra, còn dùng để:",opts:["Diễn tả hành động đã hoàn thành","Diễn tả thói quen","Diễn tả hành động đã được lên kế hoạch từ trước","Diễn tả hành động xảy ra trong quá khứ xa"],ans:2,exp:"HTTD còn diễn tả hành động đã lên kế hoạch. VD: My boss is travelling to Australia next month."},
+  {section:"Lý thuyết ngữ pháp",q:"Dấu hiệu \"every day, usually, often, always\" thuộc thì nào?",opts:["Hiện tại đơn","Hiện tại tiếp diễn","Quá khứ đơn","Hiện tại hoàn thành"],ans:0,exp:"Every day, usually, often, always → dấu hiệu thì hiện tại đơn (thói quen, sự thật)."},
+  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>quá khứ tiếp diễn</b> là:",opts:["S + Ved/V2","S + was/were + Ving","S + had + Vpp","S + have/has + Vpp"],ans:1,exp:"QKTD: S + was/were + Ving. VD: They were working when I arrived."},
 
-  // ===== PHáº¦N 2: CHá»N Dáº NG ÄÃNG Cá»¦A Äá»NG Tá»ª (15 cÃ¢u) =====
-  {section:"Chia Äá»ng tá»«",q:"The traffic lights _______ working last night because of the heavy snow.",opts:["stop","stops","stopped","to stop"],ans:2,exp:"'Last night' â quÃ¡ khá»¯ ÄÆ¡n â stopped."},
-  {section:"Chia Äá»ng tá»«",q:"The department usually _______ with customer complaints related to our products.",opts:["deal","deals","dealt","will deal"],ans:1,exp:"'Usually' + chá»§ ngá»¯ 'The department' (sá» Ã­t) â HTÄ â deals."},
-  {section:"Chia Äá»ng tá»«",q:"Officials will conduct a press conference as soon as they _______ more information.",opts:["gathers","gather","will gather","gathered"],ans:1,exp:"Má»nh Äá» tráº¡ng ngá»¯ (as soon as) â chia HTÄ. Chá»§ ngá»¯ 'they' â gather."},
-  {section:"Chia Äá»ng tá»«",q:"The director will be very satisfied when she _______ her plans.",opts:["will present","have present","presenting","presents"],ans:3,exp:"MÄ tráº¡ng ngá»¯ (when) â HTÄ. Chá»§ ngá»¯ 'she' (sá» Ã­t) â presents."},
-  {section:"Chia Äá»ng tá»«",q:"Simpson Manufacturing _______ seasonal workers for its new product line.",opts:["hire","hires","is hiring","hired"],ans:2,exp:"HÃ nh Äá»ng Äang xáº£y ra á» hiá»n táº¡i â HTTD â is hiring."},
-  {section:"Chia Äá»ng tá»«",q:"Daily guided tours of the National Museum _______ at 2 P.M on the second floor.",opts:["begin","begins","is beginning","began"],ans:0,exp:"Lá»ch trÃ¬nh cá» Äá»nh â HTÄ. Chá»§ ngá»¯ 'tours' (sá» nhiá»u) â begin."},
-  {section:"Chia Äá»ng tá»«",q:"The factory's productivity _______ since the introduction of the new manufacturing system.",opts:["improves","improved","has improved","had improved"],ans:2,exp:"'Since' â dáº¥u hiá»u HTHT â has improved."},
-  {section:"Chia Äá»ng tá»«",q:"Fashion, Inc. _______ the order before Ms. Chu requested that it be canceled.",opts:["already ships","is already shipping","had already shipped","will already ship"],ans:2,exp:"HÃ nh Äá»ng xáº£y ra TRÆ¯á»C quÃ¡ khá»¯ (before Ms. Chu requested) â QKHT â had already shipped."},
-  {section:"Chia Äá»ng tá»«",q:"The researchers _______ hard to develop a perfect new model over the last 2 years.",opts:["work","worked","are working","have been working"],ans:3,exp:"'Over the last 2 years' â HTHT tiáº¿p diá»n â have been working."},
-  {section:"Chia Äá»ng tá»«",q:"The city council _______ to increase funding for community sports facilities.",opts:["to decide","are deciding","to have decided","has decided"],ans:3,exp:"'The city council' (sá» Ã­t) + hÃ nh Äá»ng ÄÃ£ xáº£y ra â HTHT â has decided."},
-  {section:"Chia Äá»ng tá»«",q:"Last month, the coordinator _______ all the supervisors of the changes in policy.",opts:["inform","informs","informed","has informed"],ans:2,exp:"'Last month' â quÃ¡ khá»¯ ÄÆ¡n â informed."},
-  {section:"Chia Äá»ng tá»«",q:"The only grocery store in this town is temporarily closed because it _______ a renovation.",opts:["undergo","is undergoing","have undergone","will have undergone"],ans:1,exp:"HÃ nh Äá»ng Äang diá»n ra á» hiá»n táº¡i â HTTD â is undergoing."},
-  {section:"Chia Äá»ng tá»«",q:"By the end of this year, the Personnel manager _______ the employee reviews.",opts:["completes","completed","will complete","will have completed"],ans:3,exp:"'By the end of this year' â TLHT â will have completed."},
-  {section:"Chia Äá»ng tá»«",q:"Currently, MNH Co. _______ for producers for its New York station.",opts:["looks","looked","is looking","had looked"],ans:2,exp:"'Currently' â HTTD â is looking."},
-  {section:"Chia Äá»ng tá»«",q:"This commercial _______ a lot of new customers since its release last January.",opts:["attracts","will attract","have attracted","has attracted"],ans:3,exp:"'Since' â HTHT. 'This commercial' (sá» Ã­t) â has attracted."},
+  // ===== PHẦN 2: CHỌN DẠNG ĐÚNG CỦA ĐỘNG TỪ (15 câu) =====
+  {section:"Chia động từ",q:"The traffic lights _______ working last night because of the heavy snow.",opts:["stop","stops","stopped","to stop"],ans:2,exp:"'Last night' → quá khứ đơn → stopped."},
+  {section:"Chia động từ",q:"The department usually _______ with customer complaints related to our products.",opts:["deal","deals","dealt","will deal"],ans:1,exp:"'Usually' + chủ ngữ 'The department' (số ít) → HTĐ → deals."},
+  {section:"Chia động từ",q:"Officials will conduct a press conference as soon as they _______ more information.",opts:["gathers","gather","will gather","gathered"],ans:1,exp:"Mệnh đề trạng ngữ (as soon as) → chia HTĐ. Chủ ngữ 'they' → gather."},
+  {section:"Chia động từ",q:"The director will be very satisfied when she _______ her plans.",opts:["will present","have present","presenting","presents"],ans:3,exp:"MĐ trạng ngữ (when) → HTĐ. Chủ ngữ 'she' (số ít) → presents."},
+  {section:"Chia động từ",q:"Simpson Manufacturing _______ seasonal workers for its new product line.",opts:["hire","hires","is hiring","hired"],ans:2,exp:"Hành động đang xảy ra ở hiện tại → HTTD → is hiring."},
+  {section:"Chia động từ",q:"Daily guided tours of the National Museum _______ at 2 P.M on the second floor.",opts:["begin","begins","is beginning","began"],ans:0,exp:"Lịch trình cố định → HTĐ. Chủ ngữ 'tours' (số nhiều) → begin."},
+  {section:"Chia động từ",q:"The factory's productivity _______ since the introduction of the new manufacturing system.",opts:["improves","improved","has improved","had improved"],ans:2,exp:"'Since' → dấu hiệu HTHT → has improved."},
+  {section:"Chia động từ",q:"Fashion, Inc. _______ the order before Ms. Chu requested that it be canceled.",opts:["already ships","is already shipping","had already shipped","will already ship"],ans:2,exp:"Hành động xảy ra TRƯỚC quá khứ (before Ms. Chu requested) → QKHT → had already shipped."},
+  {section:"Chia động từ",q:"The researchers _______ hard to develop a perfect new model over the last 2 years.",opts:["work","worked","are working","have been working"],ans:3,exp:"'Over the last 2 years' → HTHT tiếp diễn → have been working."},
+  {section:"Chia động từ",q:"The city council _______ to increase funding for community sports facilities.",opts:["to decide","are deciding","to have decided","has decided"],ans:3,exp:"'The city council' (số ít) + hành động đã xảy ra → HTHT → has decided."},
+  {section:"Chia động từ",q:"Last month, the coordinator _______ all the supervisors of the changes in policy.",opts:["inform","informs","informed","has informed"],ans:2,exp:"'Last month' → quá khứ đơn → informed."},
+  {section:"Chia động từ",q:"The only grocery store in this town is temporarily closed because it _______ a renovation.",opts:["undergo","is undergoing","have undergone","will have undergone"],ans:1,exp:"Hành động đang diễn ra ở hiện tại → HTTD → is undergoing."},
+  {section:"Chia động từ",q:"By the end of this year, the Personnel manager _______ the employee reviews.",opts:["completes","completed","will complete","will have completed"],ans:3,exp:"'By the end of this year' → TLHT → will have completed."},
+  {section:"Chia động từ",q:"Currently, MNH Co. _______ for producers for its New York station.",opts:["looks","looked","is looking","had looked"],ans:2,exp:"'Currently' → HTTD → is looking."},
+  {section:"Chia động từ",q:"This commercial _______ a lot of new customers since its release last January.",opts:["attracts","will attract","have attracted","has attracted"],ans:3,exp:"'Since' → HTHT. 'This commercial' (số ít) → has attracted."},
 
-  // ===== PHáº¦N 3: Tá»ª Vá»°NG (10 cÃ¢u) =====
-  {section:"Tá»« vá»±ng",q:"\"state-of-the-art\" cÃ³ nghÄ©a lÃ :",opts:["Thuá»c vá» nghá» thuáº­t","Hiá»n Äáº¡i nháº¥t, tá»i tÃ¢n","Cá» Äiá»n, truyá»n thá»ng","Äáº¯t tiá»n, xa xá»"],ans:1,exp:"state-of-the-art (adj) = hiá»n Äáº¡i nháº¥t, tá»i tÃ¢n. VD: state-of-the-art equipment."},
-  {section:"Tá»« vá»±ng",q:"\"undergo\" cÃ³ nghÄ©a lÃ :",opts:["Äi phÃ­a dÆ°á»i","Tráº£i qua, chá»u Äá»±ng","Hiá»u rÃµ","KÃ¹ káº¿t há»£p Äá»ng"],ans:1,exp:"undergo (v) = tráº£i qua. VD: The store is undergoing a renovation."},
-  {section:"Tá»« vá»±ng",q:"\"fulfill\" cÃ³ nghÄ©a lÃ :",opts:["Äiá»n vÃ o Äáº§y Äá»§","HoÃ n thÃ nh, ÄÃ¡p á»©ng","Cáº£m tháº¥y thoáº£i mÃ¡i","Tháº¥t báº¡i náº·ng ná»"],ans:1,exp:"fulfill (v) = hoÃ n thÃ nh, ÄÃ¡p á»©ng. VD: Please let me know if you can fulfill my requests."},
-  {section:"Tá»« vá»±ng",q:"\"funding\" cÃ³ nghÄ©a lÃ :",opts:["Ná»n táº£ng cÆ¡ sá»","Quá»¹, nguá»n tÃ i trá»£","Sá»± phÃ¡t hiá»n","Niá»m vui thÃº"],ans:1,exp:"funding (n) = quá»¹, nguá»n tÃ i trá»£. VD: increase funding for sports facilities."},
-  {section:"Tá»« vá»±ng",q:"\"transfer\" trong ngá»¯ cáº£nh cÃ´ng viá»c cÃ³ nghÄ©a lÃ :",opts:["Chuyá»n tiá»n ngÃ¢n hÃ ng","Chuyá»n cÃ´ng tÃ¡c","Váº­n chuyá»n hÃ ng hÃ³a","PhiÃªn dá»ch tÃ i liá»u"],ans:1,exp:"transfer (v) = chuyá»n cÃ´ng tÃ¡c. VD: Ms. Cole will be transferred to the London headquarters."},
-  {section:"Tá»« vá»±ng",q:"\"productivity\" cÃ³ nghÄ©a lÃ :",opts:["Sáº£n pháº©m","NÄng suáº¥t","Sá»± sáº£n xuáº¥t","Lá»£i nhuáº­n"],ans:1,exp:"productivity (n) = nÄng suáº¥t. VD: The factory's productivity has improved."},
-  {section:"Tá»« vá»±ng",q:"\"drastically\" cÃ³ nghÄ©a lÃ :",opts:["Tá»« tá»«, cháº­m rÃ£i","Máº¡nh máº½, ÄÃ¡ng ká»","Nháº¹ nhÃ ng, tinh táº¿","ThÆ°á»ng xuyÃªn"],ans:1,exp:"drastically (adv) = máº¡nh máº½, ÄÃ¡ng ká». VD: Sales have drastically increased."},
-  {section:"Tá»« vá»±ng",q:"\"promising\" cÃ³ nghÄ©a lÃ :",opts:["Há»©a háº¹n, cam káº¿t","Äáº§y há»©a háº¹n, triá»n vá»ng","ÄÃ¡ng tháº¥t vá»ng","Äang báº­n rá»n"],ans:1,exp:"promising (adj) = Äáº§y há»©a háº¹n. VD: She is a promising young employee."},
-  {section:"Tá»« vá»±ng",q:"\"conduct\" cÃ³ nghÄ©a lÃ :",opts:["Chá» huy dÃ n nháº¡c","Tiáº¿n hÃ nh, thá»±c hiá»n","Dáº«n Äiá»n","HÃ nh vi xáº¥u"],ans:1,exp:"conduct (v) = tiáº¿n hÃ nh, thá»±c hiá»n. VD: Officials will conduct a press conference."},
-  {section:"Tá»« vá»±ng",q:"\"opening\" trong ngá»¯ cáº£nh tuyá»n dá»¥ng cÃ³ nghÄ©a lÃ :",opts:["Buá»i khai trÆ°Æ¡ng","Vá» trÃ­ Äang tuyá»n","Lá» há»ng, khe há»","CÆ¡ há»i Äáº§u tÆ°"],ans:1,exp:"opening (n) = vá» trÃ­ tuyá»n dá»¥ng Äang má». VD: We have an opening for a technical support representative."}
+  // ===== PHẦN 3: TỪ VỰNG (10 câu) =====
+  {section:"Từ vựng",q:"\"state-of-the-art\" có nghĩa là:",opts:["Thuộc về nghệ thuật","Hiện đại nhất, tối tân","Cổ điển, truyền thống","Đắt tiền, xa xỉ"],ans:1,exp:"state-of-the-art (adj) = hiện đại nhất, tối tân. VD: state-of-the-art equipment."},
+  {section:"Từ vựng",q:"\"undergo\" có nghĩa là:",opts:["Đi phía dưới","Trải qua, chịu đựng","Hiểu rõ","Ký kết hợp đồng"],ans:1,exp:"undergo (v) = trải qua. VD: The store is undergoing a renovation."},
+  {section:"Từ vựng",q:"\"fulfill\" có nghĩa là:",opts:["Điền vào đầy đủ","Hoàn thành, đáp ứng","Cảm thấy thoải mái","Thất bại nặng nề"],ans:1,exp:"fulfill (v) = hoàn thành, đáp ứng. VD: Please let me know if you can fulfill my requests."},
+  {section:"Từ vựng",q:"\"funding\" có nghĩa là:",opts:["Nền tảng cơ sở","Quỹ, nguồn tài trợ","Sự phát hiện","Niềm vui thú"],ans:1,exp:"funding (n) = quỹ, nguồn tài trợ. VD: increase funding for sports facilities."},
+  {section:"Từ vựng",q:"\"transfer\" trong ngữ cảnh công việc có nghĩa là:",opts:["Chuyển tiền ngân hàng","Chuyển công tác","Vận chuyển hàng hóa","Phiên dịch tài liệu"],ans:1,exp:"transfer (v) = chuyển công tác. VD: Ms. Cole will be transferred to the London headquarters."},
+  {section:"Từ vựng",q:"\"productivity\" có nghĩa là:",opts:["Sản phẩm","Năng suất","Sự sản xuất","Lợi nhuận"],ans:1,exp:"productivity (n) = năng suất. VD: The factory's productivity has improved."},
+  {section:"Từ vựng",q:"\"drastically\" có nghĩa là:",opts:["Từ từ, chậm rãi","Mạnh mẽ, đáng kể","Nhẹ nhàng, tinh tế","Thường xuyên"],ans:1,exp:"drastically (adv) = mạnh mẽ, đáng kể. VD: Sales have drastically increased."},
+  {section:"Từ vựng",q:"\"promising\" có nghĩa là:",opts:["Hứa hẹn, cam kết","Đầy hứa hẹn, triển vọng","Đáng thất vọng","Đang bận rộn"],ans:1,exp:"promising (adj) = đầy hứa hẹn. VD: She is a promising young employee."},
+  {section:"Từ vựng",q:"\"conduct\" có nghĩa là:",opts:["Chỉ huy dàn nhạc","Tiến hành, thực hiện","Dẫn điện","Hành vi xấu"],ans:1,exp:"conduct (v) = tiến hành, thực hiện. VD: Officials will conduct a press conference."},
+  {section:"Từ vựng",q:"\"opening\" trong ngữ cảnh tuyển dụng có nghĩa là:",opts:["Buổi khai trương","Vị trí đang tuyển","Lỗ hổng, khe hở","Cơ hội đầu tư"],ans:1,exp:"opening (n) = vị trí tuyển dụng đang mở. VD: We have an opening for a technical support representative."}
 ];
 
 var studentName='',studentClass='',answers=[],timerInterval,timeLeft=30*60,testStarted=false;
@@ -182,10 +181,10 @@ var studentName='',studentClass='',answers=[],timerInterval,timeLeft=30*60,testS
 function startTest(){
   studentName=document.getElementById('i-name').value.trim();
   studentClass=document.getElementById('i-class').value.trim();
-  if(!studentName){alert('Vui lÃ²ng nháº­p há» tÃªn!');return}
+  if(!studentName){alert('Vui lòng nhập họ tên!');return}
   document.getElementById('s-start').classList.add('hidden');
   document.getElementById('s-test').classList.remove('hidden');
-  document.getElementById('student-info').textContent=studentName+(studentClass?' â '+studentClass:'');
+  document.getElementById('student-info').textContent=studentName+(studentClass?' — '+studentClass:'');
   answers=new Array(QUESTIONS.length).fill(-1);
   renderQuestions();
   startTimer();
@@ -199,15 +198,15 @@ function renderQuestions(){
     if(q.section!==lastSection){
       lastSection=q.section;
       var sectionTitle='';
-      if(q.section==='LÃ½ thuyáº¿t ngá»¯ phÃ¡p') sectionTitle='PHáº¦N 1: LÃ THUYáº¾T NGá»® PHÃP (10 cÃ¢u)';
-      else if(q.section==='Chia Äá»ng tá»«') sectionTitle='PHáº¦N 2: CHá»N Dáº NG ÄÃNG Cá»¦A Äá»NG Tá»ª (15 cÃ¢u)';
-      else if(q.section==='Tá»« vá»±ng') sectionTitle='PHáº¦N 3: Tá»ª Vá»°NG (10 cÃ¢u)';
+      if(q.section==='Lý thuyết ngữ pháp') sectionTitle='PHẦN 1: LÝ THUYẾT NGỮ PHÁP (10 câu)';
+      else if(q.section==='Chia động từ') sectionTitle='PHẦN 2: CHỌN DẠNG ĐÚNG CỦA ĐỘNG TỪ (15 câu)';
+      else if(q.section==='Từ vựng') sectionTitle='PHẦN 3: TỪ VỰNG (10 câu)';
       html+='<div style="margin:28px 0 16px;padding:12px 16px;background:linear-gradient(135deg,#312e81,#4c1d95);border-radius:12px;font-weight:700;font-size:.95rem">'+sectionTitle+'</div>';
     }
 
     var letters=['A','B','C','D'];
     html+='<div class="question-card" id="qc-'+i+'">'
-      +'<span class="q-num">CÃ¢u '+(i+1)+'</span>'
+      +'<span class="q-num">Câu '+(i+1)+'</span>'
       +'<span class="q-section">'+q.section+'</span>'
       +'<div class="q-text">'+q.q+'</div>'
       +'<div class="options">';
@@ -225,7 +224,6 @@ function renderQuestions(){
 
 function selectAnswer(qi,oi){
   if(!testStarted) return;
-  // Clear previous
   for(var j=0;j<4;j++){
     var el=document.getElementById('opt-'+qi+'-'+j);
     if(el) el.classList.remove('selected');
@@ -240,7 +238,7 @@ function updateProgress(){
   var answered=answers.filter(function(a){return a>=0}).length;
   var pct=Math.round(answered/QUESTIONS.length*100);
   document.getElementById('prog-fill').style.width=pct+'%';
-  document.getElementById('prog-text').textContent=answered+'/'+QUESTIONS.length+' cÃ¢u ÄÃ£ tráº£ lá»i';
+  document.getElementById('prog-text').textContent=answered+'/'+QUESTIONS.length+' câu đã trả lời';
 }
 
 function startTimer(){
@@ -258,7 +256,7 @@ function submitTest(){
   if(!testStarted) return;
   var unanswered=answers.filter(function(a){return a<0}).length;
   if(unanswered>0 && timeLeft>0){
-    if(!confirm('Báº¡n cÃ²n '+unanswered+' cÃ¢u chÆ°a tráº£ lá»i. Ná»p bÃ i?')) return;
+    if(!confirm('Bạn còn '+unanswered+' câu chưa trả lời. Nộp bài?')) return;
   }
   clearInterval(timerInterval);
   testStarted=false;
@@ -277,7 +275,6 @@ function submitTest(){
       document.getElementById('opt-'+i+'-'+answers[i]).classList.add('wrong-answer');
       document.getElementById('opt-'+i+'-'+q.ans).classList.add('correct-answer');
     }
-    // Disable all options
     for(var j=0;j<4;j++){
       var el=document.getElementById('opt-'+i+'-'+j);
       if(el) el.setAttribute('disabled','true');
@@ -291,26 +288,24 @@ function submitTest(){
   var sUsed=timeUsed%60;
   var grade=score>=8?'excellent':score>=5?'good':'fail';
 
-  // Show result banner
   var resultHTML='<div class="result-screen">'
-    +'<h2 style="font-size:1.5rem;margin-bottom:16px">Káº¿t quáº£ bÃ i test</h2>'
+    +'<h2 style="font-size:1.5rem;margin-bottom:16px">Kết quả bài test</h2>'
     +'<div class="score-circle '+grade+'">'
     +'<div class="score-num">'+score+'</div>'
-    +'<div class="score-label">/ 10 Äiá»m</div></div>'
-    +'<p style="font-size:1.1rem;margin-bottom:4px">'+studentName+(studentClass?' â '+studentClass:'')+'</p>'
-    +'<p style="color:#94a3b8;font-size:.85rem">Thá»i gian: '+mUsed+' phÃºt '+sUsed+' giÃ¢y</p>'
+    +'<div class="score-label">/ 10 điểm</div></div>'
+    +'<p style="font-size:1.1rem;margin-bottom:4px">'+studentName+(studentClass?' — '+studentClass:'')+'</p>'
+    +'<p style="color:#94a3b8;font-size:.85rem">Thời gian: '+mUsed+' phút '+sUsed+' giây</p>'
     +'<div class="result-stats">'
-    +'<div class="stat green"><div class="val">'+correct+'</div><div class="lbl">ÄÃºng</div></div>'
+    +'<div class="stat green"><div class="val">'+correct+'</div><div class="lbl">Đúng</div></div>'
     +'<div class="stat red"><div class="val">'+wrong+'</div><div class="lbl">Sai</div></div>'
-    +'<div class="stat blue"><div class="val">'+skipped+'</div><div class="lbl">Bá» qua</div></div>'
+    +'<div class="stat blue"><div class="val">'+skipped+'</div><div class="lbl">Bỏ qua</div></div>'
     +'</div>'
-    +'<button class="btn-review" onclick="scrollToReview()">Xem láº¡i bÃ i lÃ m &#8595;</button>'
+    +'<button class="btn-review" onclick="scrollToReview()">Xem lại bài làm ↓</button>'
     +'</div>';
   document.getElementById('s-result').innerHTML=resultHTML;
   document.getElementById('s-result').classList.remove('hidden');
   document.getElementById('btn-submit').classList.add('hidden');
 
-  // Scroll to top
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
