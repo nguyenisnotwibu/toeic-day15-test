@@ -3,315 +3,610 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 15 Test — Verb Tenses | Thầy Vũ Nguyên</title>
+<title>Day 15 - Tenses & Passive Voice - Full Test</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
-.container{max-width:800px;margin:0 auto;padding:16px}
-
-/* Header */
-.header{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1px solid #334155;position:sticky;top:8px;z-index:100;backdrop-filter:blur(10px)}
-.header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.header h1{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,#818cf8,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.header .sub{font-size:.8rem;color:#94a3b8;margin-top:2px}
-.timer-box{display:flex;align-items:center;gap:8px;background:#1e1b4b;padding:8px 16px;border-radius:12px;font-weight:700;font-size:1.1rem;border:1px solid #4338ca}
-.timer-box.warn{background:#7f1d1d;border-color:#dc2626;animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
-.timer-icon{font-size:1.2rem}
-.progress-bar{margin-top:12px;background:#1e293b;border-radius:8px;height:6px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,#6366f1,#8b5cf6);border-radius:8px;transition:width .3s}
-.progress-text{font-size:.75rem;color:#94a3b8;margin-top:4px;text-align:right}
-
-/* Start screen */
-.start-screen{text-align:center;padding:60px 20px}
-.start-screen h2{font-size:1.8rem;margin-bottom:8px;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.start-screen p{color:#94a3b8;margin-bottom:6px;font-size:.95rem}
-.start-screen .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:400px;margin:24px auto}
-.info-card{background:#1e293b;border-radius:12px;padding:16px;border:1px solid #334155}
-.info-card .num{font-size:1.5rem;font-weight:800;color:#818cf8}
-.info-card .label{font-size:.8rem;color:#94a3b8;margin-top:4px}
-.input-group{max-width:400px;margin:24px auto}
-.input-group input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;font-size:1rem;margin-bottom:8px}
-.input-group input:focus{outline:none;border-color:#6366f1}
-.btn-start{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:14px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:16px;transition:transform .2s}
-.btn-start:hover{transform:scale(1.03)}
-
-/* Question */
-.question-card{background:#1e293b;border-radius:16px;padding:24px;margin-bottom:16px;border:1px solid #334155;transition:border-color .3s}
-.question-card.answered{border-color:#4338ca}
-.question-card.correct{border-color:#22c55e}
-.question-card.wrong{border-color:#ef4444}
-.q-num{display:inline-block;background:#6366f1;color:#fff;font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px}
-.q-section{display:inline-block;background:#7c3aed;color:#fff;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:20px;margin-left:6px;margin-bottom:10px}
-.q-text{font-size:1rem;line-height:1.6;margin-bottom:16px;color:#f1f5f9}
-.q-text .blank{color:#818cf8;font-weight:700;border-bottom:2px dashed #6366f1;padding:0 4px}
-.options{display:grid;gap:8px}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid #334155;cursor:pointer;transition:all .2s;background:#0f172a}
-.opt:hover{border-color:#6366f1;background:#1e1b4b}
-.opt.selected{border-color:#6366f1;background:#1e1b4b}
-.opt.correct-answer{border-color:#22c55e;background:#052e16}
-.opt.wrong-answer{border-color:#ef4444;background:#450a0a}
-.opt-letter{min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#334155;font-weight:700;font-size:.8rem;flex-shrink:0}
-.opt.selected .opt-letter{background:#6366f1;color:#fff}
-.opt.correct-answer .opt-letter{background:#22c55e;color:#fff}
-.opt.wrong-answer .opt-letter{background:#ef4444;color:#fff}
-.opt-text{font-size:.95rem;line-height:1.4;padding-top:3px}
-.opt[disabled]{pointer-events:none;opacity:.7}
-
-/* Submit / Result */
-.btn-submit{display:block;width:100%;padding:16px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:14px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:20px;transition:transform .2s}
-.btn-submit:hover{transform:scale(1.02)}
-.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
-
-.result-screen{text-align:center;padding:40px 20px}
-.score-circle{width:160px;height:160px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;border:6px solid}
-.score-circle.excellent{border-color:#22c55e;background:#052e16}
-.score-circle.good{border-color:#eab308;background:#422006}
-.score-circle.fail{border-color:#ef4444;background:#450a0a}
-.score-num{font-size:2.5rem;font-weight:800}
-.score-label{font-size:.85rem;color:#94a3b8}
-.result-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;max-width:500px;margin:20px auto}
-.stat{background:#1e293b;border-radius:12px;padding:14px;border:1px solid #334155}
-.stat .val{font-size:1.3rem;font-weight:700}
-.stat .lbl{font-size:.75rem;color:#94a3b8;margin-top:2px}
-.stat.green .val{color:#22c55e}
-.stat.red .val{color:#ef4444}
-.stat.blue .val{color:#818cf8}
-.btn-review{background:#334155;color:#e2e8f0;border:none;padding:12px 32px;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:20px}
-.explanation{background:#1e1b4b;border-radius:8px;padding:12px;margin-top:12px;font-size:.85rem;line-height:1.5;color:#c4b5fd;display:none}
-.show-exp .explanation{display:block}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:#e0e0e0}
+.container{max-width:800px;margin:0 auto;padding:20px}
+.header{text-align:center;padding:30px 20px;background:rgba(255,255,255,0.05);border-radius:16px;margin-bottom:24px;border:1px solid rgba(255,255,255,0.1)}
+.header h1{font-size:1.6em;color:#ffd700;margin-bottom:8px}
+.header p{color:#aaa;font-size:0.95em}
+.info-bar{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.08);padding:14px 20px;border-radius:12px;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.timer{font-size:1.3em;color:#ff6b6b;font-weight:bold}
+.timer.warning{color:#ff4444;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.progress{color:#aaa;font-size:0.9em}
+.name-input{background:rgba(255,255,255,0.08);padding:24px;border-radius:12px;margin-bottom:20px;text-align:center;border:1px solid rgba(255,255,255,0.1)}
+.name-input input{padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:1em;width:280px;max-width:90%;text-align:center}
+.name-input input::placeholder{color:#888}
+.btn{padding:12px 32px;border:none;border-radius:8px;font-size:1em;cursor:pointer;font-weight:600;transition:all 0.3s}
+.btn-start{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;margin-top:12px}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(102,126,234,0.4)}
+.btn-submit{background:linear-gradient(135deg,#f093fb,#f5576c);color:#fff;width:100%;padding:16px;font-size:1.1em;margin-top:20px}
+.section-title{background:linear-gradient(135deg,#667eea,#764ba2);padding:14px 20px;border-radius:10px;margin:24px 0 16px;font-size:1.1em;font-weight:600}
+.question{background:rgba(255,255,255,0.06);border-radius:12px;padding:18px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.08);transition:all 0.3s}
+.question:hover{border-color:rgba(255,255,255,0.15)}
+.q-text{font-size:0.95em;margin-bottom:12px;line-height:1.6}
+.q-num{color:#ffd700;font-weight:700;margin-right:6px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:600px){.options{grid-template-columns:1fr}}
+.option{padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);cursor:pointer;transition:all 0.2s;font-size:0.9em}
+.option:hover{background:rgba(102,126,234,0.2);border-color:rgba(102,126,234,0.4)}
+.option.selected{background:rgba(102,126,234,0.3);border-color:#667eea;color:#fff}
+.option.correct{background:rgba(46,213,115,0.25)!important;border-color:#2ed573!important;color:#2ed573!important}
+.option.wrong{background:rgba(255,71,87,0.25)!important;border-color:#ff4757!important;color:#ff4757!important}
+.explanation{display:none;margin-top:12px;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;font-size:0.88em;line-height:1.6;border-left:3px solid #667eea;color:#ccc}
+.explanation strong{color:#ffd700}
+.result-box{background:rgba(255,255,255,0.08);border-radius:16px;padding:30px;text-align:center;margin-top:20px;border:1px solid rgba(255,255,255,0.1)}
+.score{font-size:3em;font-weight:700;color:#ffd700;margin:10px 0}
+.score-detail{color:#aaa;margin-bottom:20px}
+.grade{font-size:1.3em;margin:10px 0;padding:8px 20px;border-radius:20px;display:inline-block}
+.grade-a{background:rgba(46,213,115,0.2);color:#2ed573}
+.grade-b{background:rgba(255,215,0,0.2);color:#ffd700}
+.grade-c{background:rgba(255,165,0,0.2);color:#ffa500}
+.grade-d{background:rgba(255,71,87,0.2);color:#ff4757}
 .hidden{display:none}
-@media(max-width:600px){.container{padding:10px}.header h1{font-size:1rem}.q-text{font-size:.92rem}}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75em;margin-left:6px}
+.tag-theory{background:rgba(102,126,234,0.2);color:#667eea}
+.tag-passive{background:rgba(240,147,251,0.2);color:#f093fb}
+.tag-vocab{background:rgba(46,213,115,0.2);color:#2ed573}
 </style>
 </head>
 <body>
+<div class="container">
+<div class="header">
+<h1>📝 DAY 15 - FULL TEST</h1>
+<p>Tenses & Passive Voice | 40 câu | 45 phút</p>
+<p style="color:#ffd700;margin-top:6px;font-size:0.85em">Thầy Vũ Nguyên — TOEIC Class</p>
+</div>
 
-<div class="container" id="app">
-  <!-- Start Screen -->
-  <div id="s-start" class="start-screen">
-    <h2>DAY 15 — TEST</h2>
-    <p>Verb Tenses (9 Thì)</p>
-    <p style="color:#64748b;font-size:.85rem">Thầy Vũ Nguyên — TOEIC Course</p>
-    <div class="info-grid">
-      <div class="info-card"><div class="num">35</div><div class="label">Câu hỏi</div></div>
-      <div class="info-card"><div class="num">30</div><div class="label">Phút</div></div>
-      <div class="info-card"><div class="num">3</div><div class="label">Phần</div></div>
-      <div class="info-card"><div class="num">10</div><div class="label">Điểm tối đa</div></div>
-    </div>
-    <div class="input-group">
-      <input type="text" id="i-name" placeholder="Họ và tên">
-      <input type="text" id="i-class" placeholder="Lớp">
-    </div>
-    <button class="btn-start" onclick="startTest()">Bắt đầu làm bài</button>
-  </div>
+<div id="startScreen">
+<div class="name-input">
+<p style="margin-bottom:12px;color:#ccc">Nhập họ tên để bắt đầu làm bài:</p>
+<input type="text" id="studentName" placeholder="Họ và tên..." autofocus>
+<br>
+<button class="btn btn-start" onclick="startQuiz()">Bắt đầu làm bài</button>
+</div>
+</div>
 
-  <!-- Test Screen -->
-  <div id="s-test" class="hidden">
-    <div class="header" id="hdr">
-      <div class="header-top">
-        <div>
-          <h1>Day 15 — Verb Tenses (9 Thì)</h1>
-          <div class="sub" id="student-info"></div>
-        </div>
-        <div class="timer-box" id="timer-box">
-          <span class="timer-icon">&#9202;</span>
-          <span id="timer">30:00</span>
-        </div>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-      <div class="progress-text" id="prog-text">0/35 câu đã trả lời</div>
-    </div>
+<div id="quizArea" class="hidden">
+<div class="info-bar">
+<div class="timer" id="timer">⏱ 45:00</div>
+<div class="progress" id="progress">Đã trả lời: 0/40</div>
+</div>
 
-    <div id="questions"></div>
+<!-- PHẦN 1: LÝ THUYẾT THÌ (14 câu) -->
+<div class="section-title">📚 Phần 1: Lý thuyết các thì (14 câu)</div>
 
-    <button class="btn-submit" id="btn-submit" onclick="submitTest()">Nộp bài</button>
-  </div>
+<div class="question" id="q1">
+<div class="q-text"><span class="q-num">1.</span> The annual advertising conference ______ place in New York every year. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(1,this,'A')">A. take</div>
+<div class="option" onclick="select(1,this,'B')">B. takes</div>
+<div class="option" onclick="select(1,this,'C')">C. is taking</div>
+<div class="option" onclick="select(1,this,'D')">D. took</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> Dấu hiệu "every year" → thì hiện tại đơn. Chủ ngữ "conference" số ít → V(s/es). "takes" là đúng.</div>
+</div>
 
-  <!-- Result Screen -->
-  <div id="s-result" class="hidden"></div>
+<div class="question" id="q2">
+<div class="q-text"><span class="q-num">2.</span> Mr. Baker ______ a business conference in Dubai last year. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(2,this,'A')">A. attends</div>
+<div class="option" onclick="select(2,this,'B')">B. will attend</div>
+<div class="option" onclick="select(2,this,'C')">C. attended</div>
+<div class="option" onclick="select(2,this,'D')">D. has attended</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> Dấu hiệu "last year" → thì quá khứ đơn → "attended".</div>
+</div>
+
+<div class="question" id="q3">
+<div class="q-text"><span class="q-num">3.</span> Next March, Green Industries ______ five employees to work in the new office in Bangkok. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(3,this,'A')">A. send</div>
+<div class="option" onclick="select(3,this,'B')">B. sent</div>
+<div class="option" onclick="select(3,this,'C')">C. will send</div>
+<div class="option" onclick="select(3,this,'D')">D. has sent</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> Dấu hiệu "Next March" → tương lai → "will send".</div>
+</div>
+
+<div class="question" id="q4">
+<div class="q-text"><span class="q-num">4.</span> Officials will conduct a press conference as soon as they ______ more information. <span class="tag tag-theory">Mệnh đề trạng ngữ</span></div>
+<div class="options">
+<div class="option" onclick="select(4,this,'A')">A. gathers</div>
+<div class="option" onclick="select(4,this,'B')">B. gather</div>
+<div class="option" onclick="select(4,this,'C')">C. will gather</div>
+<div class="option" onclick="select(4,this,'D')">D. have been gathered</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> Mệnh đề trạng ngữ thời gian (as soon as): MĐ chính chia tương lai đơn (will conduct) → MĐ trạng ngữ chia hiện tại đơn. "they" số nhiều → "gather".</div>
+</div>
+
+<div class="question" id="q5">
+<div class="q-text"><span class="q-num">5.</span> The factory's productivity ______ since the introduction of the new manufacturing system. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(5,this,'A')">A. improves</div>
+<div class="option" onclick="select(5,this,'B')">B. improved</div>
+<div class="option" onclick="select(5,this,'C')">C. has improved</div>
+<div class="option" onclick="select(5,this,'D')">D. had improved</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> Dấu hiệu "since" → thì hiện tại hoàn thành. Chủ ngữ "productivity" số ít → "has improved".</div>
+</div>
+
+<div class="question" id="q6">
+<div class="q-text"><span class="q-num">6.</span> The Prince Corporation ______ the top chemical supplier for the last 10 years. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(6,this,'A')">A. was</div>
+<div class="option" onclick="select(6,this,'B')">B. has been</div>
+<div class="option" onclick="select(6,this,'C')">C. had been</div>
+<div class="option" onclick="select(6,this,'D')">D. will have been</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> Dấu hiệu "for the last 10 years" → hiện tại hoàn thành → "has been".</div>
+</div>
+
+<div class="question" id="q7">
+<div class="q-text"><span class="q-num">7.</span> Fashion, Inc. ______ the order before Ms. Chu requested that it be canceled. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(7,this,'A')">A. already ships</div>
+<div class="option" onclick="select(7,this,'B')">B. is already shipping</div>
+<div class="option" onclick="select(7,this,'C')">C. had already shipped</div>
+<div class="option" onclick="select(7,this,'D')">D. will have already shipped</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "before Ms. Chu requested" → hành động xảy ra TRƯỚC một hành động quá khứ → quá khứ hoàn thành → "had already shipped".</div>
+</div>
+
+<div class="question" id="q8">
+<div class="q-text"><span class="q-num">8.</span> The researchers ______ hard to develop a perfect new model over the last 2 years. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(8,this,'A')">A. work</div>
+<div class="option" onclick="select(8,this,'B')">B. worked</div>
+<div class="option" onclick="select(8,this,'C')">C. are working</div>
+<div class="option" onclick="select(8,this,'D')">D. have been working</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> "over the last 2 years" → hành động bắt đầu trong quá khứ, kéo dài đến hiện tại, nhấn mạnh khoảng thời gian → hiện tại hoàn thành tiếp diễn → "have been working".</div>
+</div>
+
+<div class="question" id="q9">
+<div class="q-text"><span class="q-num">9.</span> The community center ______ for donations to help the disabled and the elderly. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(9,this,'A')">A. ask</div>
+<div class="option" onclick="select(9,this,'B')">B. is asking</div>
+<div class="option" onclick="select(9,this,'C')">C. to asking</div>
+<div class="option" onclick="select(9,this,'D')">D. have asked</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> Câu cần một động từ được chia đúng. "The community center" số ít → loại A (thiếu s), C (không phải động từ chia), D (have → số nhiều). Đáp án B "is asking" (hiện tại tiếp diễn) đúng ngữ pháp.</div>
+</div>
+
+<div class="question" id="q10">
+<div class="q-text"><span class="q-num">10.</span> The director will be very satisfied when she ______ her plans. <span class="tag tag-theory">Mệnh đề trạng ngữ</span></div>
+<div class="options">
+<div class="option" onclick="select(10,this,'A')">A. will present</div>
+<div class="option" onclick="select(10,this,'B')">B. have present</div>
+<div class="option" onclick="select(10,this,'C')">C. presenting</div>
+<div class="option" onclick="select(10,this,'D')">D. presents</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> Mệnh đề trạng ngữ thời gian (when): MĐ chính chia tương lai (will be) → MĐ trạng ngữ chia hiện tại đơn. "she" số ít → "presents".</div>
+</div>
+
+<div class="question" id="q11">
+<div class="q-text"><span class="q-num">11.</span> This commercial ______ a lot of new customers since its release last January. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(11,this,'A')">A. attracts</div>
+<div class="option" onclick="select(11,this,'B')">B. will attract</div>
+<div class="option" onclick="select(11,this,'C')">C. have attracted</div>
+<div class="option" onclick="select(11,this,'D')">D. has attracted</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> Dấu hiệu "since" → hiện tại hoàn thành. Chủ ngữ "This commercial" số ít → "has attracted".</div>
+</div>
+
+<div class="question" id="q12">
+<div class="q-text"><span class="q-num">12.</span> By the end of this year, the Personnel manager ______ the employee reviews. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(12,this,'A')">A. completes</div>
+<div class="option" onclick="select(12,this,'B')">B. had completely</div>
+<div class="option" onclick="select(12,this,'C')">C. will be completed</div>
+<div class="option" onclick="select(12,this,'D')">D. will have completed</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> "By the end of this year" → hoàn tất TRƯỚC một thời điểm tương lai → tương lai hoàn thành → "will have completed". (Lưu ý: có tân ngữ "the employee reviews" → chủ động).</div>
+</div>
+
+<div class="question" id="q13">
+<div class="q-text"><span class="q-num">13.</span> Currently, MNH Co. ______ for producers for its New York station. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(13,this,'A')">A. looks</div>
+<div class="option" onclick="select(13,this,'B')">B. looked</div>
+<div class="option" onclick="select(13,this,'C')">C. is looking</div>
+<div class="option" onclick="select(13,this,'D')">D. had looked</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> Dấu hiệu "Currently" → đang diễn ra → hiện tại tiếp diễn → "is looking".</div>
+</div>
+
+<div class="question" id="q14">
+<div class="q-text"><span class="q-num">14.</span> Many of the employees in this factory ______ to leave after the huge salary cut three weeks ago. <span class="tag tag-theory">Thì</span></div>
+<div class="options">
+<div class="option" onclick="select(14,this,'A')">A. decide</div>
+<div class="option" onclick="select(14,this,'B')">B. decides</div>
+<div class="option" onclick="select(14,this,'C')">C. decided</div>
+<div class="option" onclick="select(14,this,'D')">D. have decided</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> Dấu hiệu "three weeks ago" → quá khứ đơn → "decided".</div>
+</div>
+
+<!-- PHẦN 2: CÂU BỊ ĐỘNG (14 câu) -->
+<div class="section-title">🔄 Phần 2: Câu bị động — Passive Voice (14 câu)</div>
+
+<div class="question" id="q15">
+<div class="q-text"><span class="q-num">15.</span> Next month, Ms. Cole ______ to the headquarters in London. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(15,this,'A')">A. transfer</div>
+<div class="option" onclick="select(15,this,'B')">B. was transferred</div>
+<div class="option" onclick="select(15,this,'C')">C. was transferring</div>
+<div class="option" onclick="select(15,this,'D')">D. will be transferred</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> "Next month" → tương lai. Ms. Cole được chuyển (bị động) → "will be transferred". Không có tân ngữ sau chỗ trống → bị động.</div>
+</div>
+
+<div class="question" id="q16">
+<div class="q-text"><span class="q-num">16.</span> All the flights to Beijing and Shanghai ______ due to bad weather conditions. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(16,this,'A')">A. canceled</div>
+<div class="option" onclick="select(16,this,'B')">B. is canceled</div>
+<div class="option" onclick="select(16,this,'C')">C. have canceled</div>
+<div class="option" onclick="select(16,this,'D')">D. have been canceled</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> Chủ ngữ "All the flights" là đối tượng bị hủy (bị động). Số nhiều → "have been canceled".</div>
+</div>
+
+<div class="question" id="q17">
+<div class="q-text"><span class="q-num">17.</span> Mr. Davis has already ______ about the meeting next week. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(17,this,'A')">A. told</div>
+<div class="option" onclick="select(17,this,'B')">B. been told</div>
+<div class="option" onclick="select(17,this,'C')">C. tell</div>
+<div class="option" onclick="select(17,this,'D')">D. been</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> Mr. Davis ĐƯỢC thông báo (bị động). "has already" + Vpp → cần "been told" (have been + Vpp = hiện tại hoàn thành bị động).</div>
+</div>
+
+<div class="question" id="q18">
+<div class="q-text"><span class="q-num">18.</span> All the necessary documents should ______ by the end of the month. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(18,this,'A')">A. submit</div>
+<div class="option" onclick="select(18,this,'B')">B. submitted</div>
+<div class="option" onclick="select(18,this,'C')">C. have submitted</div>
+<div class="option" onclick="select(18,this,'D')">D. be submitted</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> "documents" là đối tượng bị nộp → bị động. Modal verb + be + Vpp → "should be submitted".</div>
+</div>
+
+<div class="question" id="q19">
+<div class="q-text"><span class="q-num">19.</span> Some revisions ______ to the design of the new magazine. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(19,this,'A')">A. made</div>
+<div class="option" onclick="select(19,this,'B')">B. have made</div>
+<div class="option" onclick="select(19,this,'C')">C. have been made</div>
+<div class="option" onclick="select(19,this,'D')">D. have been making</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "revisions" được thực hiện (bị động). Không có tân ngữ sau → bị động → "have been made" (hiện tại hoàn thành bị động).</div>
+</div>
+
+<div class="question" id="q20">
+<div class="q-text"><span class="q-num">20.</span> Dr. West ______ the Nelson Award for his innovative robotic surgical devices. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(20,this,'A')">A. given</div>
+<div class="option" onclick="select(20,this,'B')">B. was given</div>
+<div class="option" onclick="select(20,this,'C')">C. was giving</div>
+<div class="option" onclick="select(20,this,'D')">D. has given</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> Dr. West ĐƯỢC trao giải (bị động) → "was given" (quá khứ đơn bị động).</div>
+</div>
+
+<div class="question" id="q21">
+<div class="q-text"><span class="q-num">21.</span> The new software development meeting will ______ in room 40B. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(21,this,'A')">A. hold</div>
+<div class="option" onclick="select(21,this,'B')">B. held</div>
+<div class="option" onclick="select(21,this,'C')">C. be held</div>
+<div class="option" onclick="select(21,this,'D')">D. has been held</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "meeting" ĐƯỢC tổ chức (bị động). will + be + Vpp → "will be held" (tương lai đơn bị động).</div>
+</div>
+
+<div class="question" id="q22">
+<div class="q-text"><span class="q-num">22.</span> The door ______ last week right after the director's visit to the office. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(22,this,'A')">A. repaired</div>
+<div class="option" onclick="select(22,this,'B')">B. is repaired</div>
+<div class="option" onclick="select(22,this,'C')">C. was repaired</div>
+<div class="option" onclick="select(22,this,'D')">D. will be repaired</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "last week" → quá khứ. "The door" ĐƯỢC sửa (bị động) → "was repaired" (quá khứ đơn bị động).</div>
+</div>
+
+<div class="question" id="q23">
+<div class="q-text"><span class="q-num">23.</span> Mr. Coleman has ______ as a temporary worker at the History & Art Museum. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(23,this,'A')">A. hire</div>
+<div class="option" onclick="select(23,this,'B')">B. hired</div>
+<div class="option" onclick="select(23,this,'C')">C. hiring</div>
+<div class="option" onclick="select(23,this,'D')">D. been hired</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> Mr. Coleman ĐƯỢC thuê (bị động). "has" + ___ → cần "been hired" (have/has + been + Vpp = hiện tại hoàn thành bị động).</div>
+</div>
+
+<div class="question" id="q24">
+<div class="q-text"><span class="q-num">24.</span> College tuition payments for the next semester must be ______ by the end of the month. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(24,this,'A')">A. receive</div>
+<div class="option" onclick="select(24,this,'B')">B. received</div>
+<div class="option" onclick="select(24,this,'C')">C. to receive</div>
+<div class="option" onclick="select(24,this,'D')">D. being received</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> "must be" + Vpp → bị động với modal verb → "must be received".</div>
+</div>
+
+<div class="question" id="q25">
+<div class="q-text"><span class="q-num">25.</span> Mr. Han ______ a job position in Texas, and he will probably accept it. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(25,this,'A')">A. offers</div>
+<div class="option" onclick="select(25,this,'B')">B. has offered</div>
+<div class="option" onclick="select(25,this,'C')">C. has been offered</div>
+<div class="option" onclick="select(25,this,'D')">D. will have offered</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> Mr. Han ĐƯỢC đề nghị (bị động) vị trí → "has been offered" (hiện tại hoàn thành bị động).</div>
+</div>
+
+<div class="question" id="q26">
+<div class="q-text"><span class="q-num">26.</span> Please be aware that the old computers will ______ with new ones by the end of the fiscal year. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(26,this,'A')">A. replacing</div>
+<div class="option" onclick="select(26,this,'B')">B. replaces</div>
+<div class="option" onclick="select(26,this,'C')">C. be replaced</div>
+<div class="option" onclick="select(26,this,'D')">D. be replacing</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "computers" ĐƯỢC thay thế (bị động). will + be + Vpp → "will be replaced".</div>
+</div>
+
+<div class="question" id="q27">
+<div class="q-text"><span class="q-num">27.</span> Air pollution has to ______ no matter how much money is spent. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(27,this,'A')">A. reduce</div>
+<div class="option" onclick="select(27,this,'B')">B. is reduced</div>
+<div class="option" onclick="select(27,this,'C')">C. be reduced</div>
+<div class="option" onclick="select(27,this,'D')">D. been reduced</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "has to" + be + Vpp → "has to be reduced". Ô nhiễm ĐƯỢC giảm (bị động).</div>
+</div>
+
+<div class="question" id="q28">
+<div class="q-text"><span class="q-num">28.</span> Commuters were ______ to use Highway 140 instead of Highway 210 due to road construction. <span class="tag tag-passive">Bị động</span></div>
+<div class="options">
+<div class="option" onclick="select(28,this,'A')">A. advice</div>
+<div class="option" onclick="select(28,this,'B')">B. advise</div>
+<div class="option" onclick="select(28,this,'C')">C. advised</div>
+<div class="option" onclick="select(28,this,'D')">D. advising</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "were" + Vpp = quá khứ đơn bị động → "were advised" (được khuyên). Lưu ý: advice (n) ≠ advise (v).</div>
+</div>
+
+<!-- PHẦN 3: TỪ VỰNG (12 câu) -->
+<div class="section-title">📖 Phần 3: Từ vựng — Vocabulary (12 câu)</div>
+
+<div class="question" id="q29">
+<div class="q-text"><span class="q-num">29.</span> Jack's Gym has ______ equipment and professional personal trainers. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(29,this,'A')">A. state-of-the-art</div>
+<div class="option" onclick="select(29,this,'B')">B. hand-made</div>
+<div class="option" onclick="select(29,this,'C')">C. second-hand</div>
+<div class="option" onclick="select(29,this,'D')">D. out-of-date</div>
+</div>
+<div class="explanation"><strong>Đáp án: A.</strong> "state-of-the-art" (adj) = hiện đại, tối tân nhất. Phòng gym có thiết bị hiện đại nhất.</div>
+</div>
+
+<div class="question" id="q30">
+<div class="q-text"><span class="q-num">30.</span> The only grocery store in this town is temporarily closed because it ______ a renovation. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(30,this,'A')">A. is conducting</div>
+<div class="option" onclick="select(30,this,'B')">B. is undergoing</div>
+<div class="option" onclick="select(30,this,'C')">C. is fulfilling</div>
+<div class="option" onclick="select(30,this,'D')">D. is transferring</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> "undergo" (v) = trải qua. "undergo a renovation" = đang trải qua việc tu sửa. Đây là cụm từ cố định phổ biến trong TOEIC.</div>
+</div>
+
+<div class="question" id="q31">
+<div class="q-text"><span class="q-num">31.</span> Please let me know if you can ______ my requests or not. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(31,this,'A')">A. conduct</div>
+<div class="option" onclick="select(31,this,'B')">B. transfer</div>
+<div class="option" onclick="select(31,this,'C')">C. fulfill</div>
+<div class="option" onclick="select(31,this,'D')">D. attend</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "fulfill" (v) = đáp ứng, thực hiện. "fulfill a request" = đáp ứng yêu cầu.</div>
+</div>
+
+<div class="question" id="q32">
+<div class="q-text"><span class="q-num">32.</span> The city council has decided to increase ______ for community sports facilities. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(32,this,'A')">A. funding</div>
+<div class="option" onclick="select(32,this,'B')">B. finding</div>
+<div class="option" onclick="select(32,this,'C')">C. founding</div>
+<div class="option" onclick="select(32,this,'D')">D. fining</div>
+</div>
+<div class="explanation"><strong>Đáp án: A.</strong> "funding" (n) = nguồn quỹ, tài trợ. "increase funding" = tăng nguồn quỹ. Phân biệt: finding (phát hiện), founding (thành lập), fining (phạt tiền).</div>
+</div>
+
+<div class="question" id="q33">
+<div class="q-text"><span class="q-num">33.</span> Next month, Ms. Cole will be ______ to the headquarters in London. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(33,this,'A')">A. promoted</div>
+<div class="option" onclick="select(33,this,'B')">B. transferred</div>
+<div class="option" onclick="select(33,this,'C')">C. conducted</div>
+<div class="option" onclick="select(33,this,'D')">D. attended</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> "transfer" (v) = chuyển công tác. "be transferred to" = được chuyển đến. "headquarters" = trụ sở chính.</div>
+</div>
+
+<div class="question" id="q34">
+<div class="q-text"><span class="q-num">34.</span> The number of complaints has decreased ______ since we adopted the new programs. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(34,this,'A')">A. privately</div>
+<div class="option" onclick="select(34,this,'B')">B. drastically</div>
+<div class="option" onclick="select(34,this,'C')">C. frequently</div>
+<div class="option" onclick="select(34,this,'D')">D. occasionally</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> "drastically" (adv) = một cách mạnh mẽ, đáng kể. "decreased drastically" = giảm mạnh.</div>
+</div>
+
+<div class="question" id="q35">
+<div class="q-text"><span class="q-num">35.</span> Mr. Cho created a healthy and ______ business plan in 2010. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(35,this,'A')">A. promising</div>
+<div class="option" onclick="select(35,this,'B')">B. declining</div>
+<div class="option" onclick="select(35,this,'C')">C. demanding</div>
+<div class="option" onclick="select(35,this,'D')">D. confusing</div>
+</div>
+<div class="explanation"><strong>Đáp án: A.</strong> "promising" (adj) = đầy hứa hẹn. "a promising business plan" = một kế hoạch kinh doanh đầy hứa hẹn.</div>
+</div>
+
+<div class="question" id="q36">
+<div class="q-text"><span class="q-num">36.</span> Officials will ______ a press conference as soon as they gather more information. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(36,this,'A')">A. attend</div>
+<div class="option" onclick="select(36,this,'B')">B. conduct</div>
+<div class="option" onclick="select(36,this,'C')">C. undergo</div>
+<div class="option" onclick="select(36,this,'D')">D. fulfill</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> "conduct" (v) = tiến hành, tổ chức. "conduct a press conference" = tổ chức họp báo. Phân biệt: attend = tham dự (không tổ chức).</div>
+</div>
+
+<div class="question" id="q37">
+<div class="q-text"><span class="q-num">37.</span> The technical support division has an ______ for a technical support representative. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(37,this,'A')">A. introduction</div>
+<div class="option" onclick="select(37,this,'B')">B. position</div>
+<div class="option" onclick="select(37,this,'C')">C. seat</div>
+<div class="option" onclick="select(37,this,'D')">D. opening</div>
+</div>
+<div class="explanation"><strong>Đáp án: D.</strong> "opening" (n) = vị trí tuyển dụng còn trống. "job opening" = vị trí công việc đang tuyển.</div>
+</div>
+
+<div class="question" id="q38">
+<div class="q-text"><span class="q-num">38.</span> Simpson Manufacturing Co. is hiring ______ workers to meet the high demand. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(38,this,'A')">A. experienced</div>
+<div class="option" onclick="select(38,this,'B')">B. expired</div>
+<div class="option" onclick="select(38,this,'C')">C. expected</div>
+<div class="option" onclick="select(38,this,'D')">D. expanded</div>
+</div>
+<div class="explanation"><strong>Đáp án: A.</strong> "experienced" (adj) = có kinh nghiệm. "experienced workers" = công nhân có kinh nghiệm.</div>
+</div>
+
+<div class="question" id="q39">
+<div class="q-text"><span class="q-num">39.</span> More than 500 people ______ the annual business conference in Ho Chi Minh City last month. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(39,this,'A')">A. conducted</div>
+<div class="option" onclick="select(39,this,'B')">B. attended</div>
+<div class="option" onclick="select(39,this,'C')">C. promoted</div>
+<div class="option" onclick="select(39,this,'D')">D. transferred</div>
+</div>
+<div class="explanation"><strong>Đáp án: B.</strong> "attend" (v) = tham dự. "attended the conference" = đã tham dự hội nghị.</div>
+</div>
+
+<div class="question" id="q40">
+<div class="q-text"><span class="q-num">40.</span> After three years of hard work, she was finally ______ to senior manager. <span class="tag tag-vocab">Từ vựng</span></div>
+<div class="options">
+<div class="option" onclick="select(40,this,'A')">A. transferred</div>
+<div class="option" onclick="select(40,this,'B')">B. fulfilled</div>
+<div class="option" onclick="select(40,this,'C')">C. promoted</div>
+<div class="option" onclick="select(40,this,'D')">D. conducted</div>
+</div>
+<div class="explanation"><strong>Đáp án: C.</strong> "be promoted to" = được thăng chức lên. "promoted to senior manager" = thăng chức lên quản lý cấp cao.</div>
+</div>
+
+<button class="btn btn-submit" onclick="submitQuiz()">Nộp bài</button>
+</div>
+
+<div id="resultArea" class="hidden"></div>
 </div>
 
 <script>
-var QUESTIONS = [
-  // ===== PHẦN 1: LÝ THUYẾT NGỮ PHÁP (10 câu) =====
-  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>hiện tại đơn</b> (chủ ngữ số ít) là:",opts:["S + V(bare)","S + V(s/es)","S + am/is/are + Ving","S + have/has + Vpp"],ans:1,exp:"HTĐ: S(số ít) + V(s/es). VD: He works every day."},
-  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>quá khứ hoàn thành</b> là:",opts:["S + have/has + Vpp","S + had + Vpp","S + was/were + Ving","S + Ved/V2"],ans:1,exp:"QKHT: S + had + Vpp. VD: I had eaten before I came here."},
-  {section:"Lý thuyết ngữ pháp",q:"Dấu hiệu nào <b>KHÔNG</b> phải của thì hiện tại hoàn thành?",opts:["since","for","yesterday","recently"],ans:2,exp:"'Yesterday' là dấu hiệu của thì quá khứ đơn. HTHT dùng: since, for, already, yet, just, recently, so far..."},
-  {section:"Lý thuyết ngữ pháp",q:"Trong câu có mệnh đề trạng ngữ thời gian (when, as soon as, before...), <b>mệnh đề chính</b> chia thì gì?",opts:["Hiện tại đơn","Tương lai đơn (will + V)","Quá khứ đơn","Hiện tại hoàn thành"],ans:1,exp:"MĐ chính → tương lai đơn (will + V). MĐ trạng ngữ → hiện tại đơn. VD: I will be happy when I get 900 TOEIC."},
-  {section:"Lý thuyết ngữ pháp",q:"\"Be going to + V\" dùng để diễn tả:",opts:["Hành động không có kế hoạch, phát sinh tại chỗ","Hành động CÓ KẾ HOẠCH, CÓ DỰ ĐỊNH từ trước","Hành động đang xảy ra ở hiện tại","Hành động đã hoàn thành trong quá khứ"],ans:1,exp:"'Be going to' → có kế hoạch/dự định. 'Will' → không có kế hoạch, quyết định tại thời điểm nói."},
-  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>tương lai hoàn thành</b> là:",opts:["S + will + V","S + will be + Ving","S + will have + Vpp","S + have/has + Vpp"],ans:2,exp:"TLHT: S + will have + Vpp. VD: By next month, I will have finished the project."},
-  {section:"Lý thuyết ngữ pháp",q:"\"By the time\" là dấu hiệu của thì nào?",opts:["Hiện tại hoàn thành","Quá khứ hoàn thành / Tương lai hoàn thành","Hiện tại tiếp diễn","Quá khứ đơn"],ans:1,exp:"'By the time' + mệnh đề → dấu hiệu QKHT hoặc TLHT. VD: I had eaten by the time she arrived."},
-  {section:"Lý thuyết ngữ pháp",q:"Thì <b>hiện tại tiếp diễn</b> ngoài diễn tả hành động đang xảy ra, còn dùng để:",opts:["Diễn tả hành động đã hoàn thành","Diễn tả thói quen","Diễn tả hành động đã được lên kế hoạch từ trước","Diễn tả hành động xảy ra trong quá khứ xa"],ans:2,exp:"HTTD còn diễn tả hành động đã lên kế hoạch. VD: My boss is travelling to Australia next month."},
-  {section:"Lý thuyết ngữ pháp",q:"Dấu hiệu \"every day, usually, often, always\" thuộc thì nào?",opts:["Hiện tại đơn","Hiện tại tiếp diễn","Quá khứ đơn","Hiện tại hoàn thành"],ans:0,exp:"Every day, usually, often, always → dấu hiệu thì hiện tại đơn (thói quen, sự thật)."},
-  {section:"Lý thuyết ngữ pháp",q:"Công thức thì <b>quá khứ tiếp diễn</b> là:",opts:["S + Ved/V2","S + was/were + Ving","S + had + Vpp","S + have/has + Vpp"],ans:1,exp:"QKTD: S + was/were + Ving. VD: They were working when I arrived."},
-
-  // ===== PHẦN 2: CHỌN DẠNG ĐÚNG CỦA ĐỘNG TỪ (15 câu) =====
-  {section:"Chia động từ",q:"The traffic lights _______ working last night because of the heavy snow.",opts:["stop","stops","stopped","to stop"],ans:2,exp:"'Last night' → quá khứ đơn → stopped."},
-  {section:"Chia động từ",q:"The department usually _______ with customer complaints related to our products.",opts:["deal","deals","dealt","will deal"],ans:1,exp:"'Usually' + chủ ngữ 'The department' (số ít) → HTĐ → deals."},
-  {section:"Chia động từ",q:"Officials will conduct a press conference as soon as they _______ more information.",opts:["gathers","gather","will gather","gathered"],ans:1,exp:"Mệnh đề trạng ngữ (as soon as) → chia HTĐ. Chủ ngữ 'they' → gather."},
-  {section:"Chia động từ",q:"The director will be very satisfied when she _______ her plans.",opts:["will present","have present","presenting","presents"],ans:3,exp:"MĐ trạng ngữ (when) → HTĐ. Chủ ngữ 'she' (số ít) → presents."},
-  {section:"Chia động từ",q:"Simpson Manufacturing _______ seasonal workers for its new product line.",opts:["hire","hires","is hiring","hired"],ans:2,exp:"Hành động đang xảy ra ở hiện tại → HTTD → is hiring."},
-  {section:"Chia động từ",q:"Daily guided tours of the National Museum _______ at 2 P.M on the second floor.",opts:["begin","begins","is beginning","began"],ans:0,exp:"Lịch trình cố định → HTĐ. Chủ ngữ 'tours' (số nhiều) → begin."},
-  {section:"Chia động từ",q:"The factory's productivity _______ since the introduction of the new manufacturing system.",opts:["improves","improved","has improved","had improved"],ans:2,exp:"'Since' → dấu hiệu HTHT → has improved."},
-  {section:"Chia động từ",q:"Fashion, Inc. _______ the order before Ms. Chu requested that it be canceled.",opts:["already ships","is already shipping","had already shipped","will already ship"],ans:2,exp:"Hành động xảy ra TRƯỚC quá khứ (before Ms. Chu requested) → QKHT → had already shipped."},
-  {section:"Chia động từ",q:"The researchers _______ hard to develop a perfect new model over the last 2 years.",opts:["work","worked","are working","have been working"],ans:3,exp:"'Over the last 2 years' → HTHT tiếp diễn → have been working."},
-  {section:"Chia động từ",q:"The city council _______ to increase funding for community sports facilities.",opts:["to decide","are deciding","to have decided","has decided"],ans:3,exp:"'The city council' (số ít) + hành động đã xảy ra → HTHT → has decided."},
-  {section:"Chia động từ",q:"Last month, the coordinator _______ all the supervisors of the changes in policy.",opts:["inform","informs","informed","has informed"],ans:2,exp:"'Last month' → quá khứ đơn → informed."},
-  {section:"Chia động từ",q:"The only grocery store in this town is temporarily closed because it _______ a renovation.",opts:["undergo","is undergoing","have undergone","will have undergone"],ans:1,exp:"Hành động đang diễn ra ở hiện tại → HTTD → is undergoing."},
-  {section:"Chia động từ",q:"By the end of this year, the Personnel manager _______ the employee reviews.",opts:["completes","completed","will complete","will have completed"],ans:3,exp:"'By the end of this year' → TLHT → will have completed."},
-  {section:"Chia động từ",q:"Currently, MNH Co. _______ for producers for its New York station.",opts:["looks","looked","is looking","had looked"],ans:2,exp:"'Currently' → HTTD → is looking."},
-  {section:"Chia động từ",q:"This commercial _______ a lot of new customers since its release last January.",opts:["attracts","will attract","have attracted","has attracted"],ans:3,exp:"'Since' → HTHT. 'This commercial' (số ít) → has attracted."},
-
-  // ===== PHẦN 3: TỪ VỰNG (10 câu) =====
-  {section:"Từ vựng",q:"\"state-of-the-art\" có nghĩa là:",opts:["Thuộc về nghệ thuật","Hiện đại nhất, tối tân","Cổ điển, truyền thống","Đắt tiền, xa xỉ"],ans:1,exp:"state-of-the-art (adj) = hiện đại nhất, tối tân. VD: state-of-the-art equipment."},
-  {section:"Từ vựng",q:"\"undergo\" có nghĩa là:",opts:["Đi phía dưới","Trải qua, chịu đựng","Hiểu rõ","Ký kết hợp đồng"],ans:1,exp:"undergo (v) = trải qua. VD: The store is undergoing a renovation."},
-  {section:"Từ vựng",q:"\"fulfill\" có nghĩa là:",opts:["Điền vào đầy đủ","Hoàn thành, đáp ứng","Cảm thấy thoải mái","Thất bại nặng nề"],ans:1,exp:"fulfill (v) = hoàn thành, đáp ứng. VD: Please let me know if you can fulfill my requests."},
-  {section:"Từ vựng",q:"\"funding\" có nghĩa là:",opts:["Nền tảng cơ sở","Quỹ, nguồn tài trợ","Sự phát hiện","Niềm vui thú"],ans:1,exp:"funding (n) = quỹ, nguồn tài trợ. VD: increase funding for sports facilities."},
-  {section:"Từ vựng",q:"\"transfer\" trong ngữ cảnh công việc có nghĩa là:",opts:["Chuyển tiền ngân hàng","Chuyển công tác","Vận chuyển hàng hóa","Phiên dịch tài liệu"],ans:1,exp:"transfer (v) = chuyển công tác. VD: Ms. Cole will be transferred to the London headquarters."},
-  {section:"Từ vựng",q:"\"productivity\" có nghĩa là:",opts:["Sản phẩm","Năng suất","Sự sản xuất","Lợi nhuận"],ans:1,exp:"productivity (n) = năng suất. VD: The factory's productivity has improved."},
-  {section:"Từ vựng",q:"\"drastically\" có nghĩa là:",opts:["Từ từ, chậm rãi","Mạnh mẽ, đáng kể","Nhẹ nhàng, tinh tế","Thường xuyên"],ans:1,exp:"drastically (adv) = mạnh mẽ, đáng kể. VD: Sales have drastically increased."},
-  {section:"Từ vựng",q:"\"promising\" có nghĩa là:",opts:["Hứa hẹn, cam kết","Đầy hứa hẹn, triển vọng","Đáng thất vọng","Đang bận rộn"],ans:1,exp:"promising (adj) = đầy hứa hẹn. VD: She is a promising young employee."},
-  {section:"Từ vựng",q:"\"conduct\" có nghĩa là:",opts:["Chỉ huy dàn nhạc","Tiến hành, thực hiện","Dẫn điện","Hành vi xấu"],ans:1,exp:"conduct (v) = tiến hành, thực hiện. VD: Officials will conduct a press conference."},
-  {section:"Từ vựng",q:"\"opening\" trong ngữ cảnh tuyển dụng có nghĩa là:",opts:["Buổi khai trương","Vị trí đang tuyển","Lỗ hổng, khe hở","Cơ hội đầu tư"],ans:1,exp:"opening (n) = vị trí tuyển dụng đang mở. VD: We have an opening for a technical support representative."}
-];
-
-var studentName='',studentClass='',answers=[],timerInterval,timeLeft=30*60,testStarted=false;
-
-function startTest(){
-  studentName=document.getElementById('i-name').value.trim();
-  studentClass=document.getElementById('i-class').value.trim();
-  if(!studentName){alert('Vui lòng nhập họ tên!');return}
-  document.getElementById('s-start').classList.add('hidden');
-  document.getElementById('s-test').classList.remove('hidden');
-  document.getElementById('student-info').textContent=studentName+(studentClass?' — '+studentClass:'');
-  answers=new Array(QUESTIONS.length).fill(-1);
-  renderQuestions();
-  startTimer();
-  testStarted=true;
+const answers={1:'B',2:'C',3:'C',4:'B',5:'C',6:'B',7:'C',8:'D',9:'B',10:'D',11:'D',12:'D',13:'C',14:'C',15:'D',16:'D',17:'B',18:'D',19:'C',20:'B',21:'C',22:'C',23:'D',24:'B',25:'C',26:'C',27:'C',28:'C',29:'A',30:'B',31:'C',32:'A',33:'B',34:'B',35:'A',36:'B',37:'D',38:'A',39:'B',40:'C'};
+let selected={},timerInterval,timeLeft=45*60;
+function startQuiz(){
+const name=document.getElementById('studentName').value.trim();
+if(!name){alert('Vui lòng nhập họ tên!');return}
+document.getElementById('startScreen').classList.add('hidden');
+document.getElementById('quizArea').classList.remove('hidden');
+timerInterval=setInterval(()=>{
+timeLeft--;
+const m=Math.floor(timeLeft/60),s=timeLeft%60;
+const el=document.getElementById('timer');
+el.textContent=`⏱ ${m}:${s.toString().padStart(2,'0')}`;
+if(timeLeft<=300)el.classList.add('warning');
+if(timeLeft<=0){clearInterval(timerInterval);submitQuiz()}
+},1000);
 }
-
-function renderQuestions(){
-  var html='';
-  var lastSection='';
-  QUESTIONS.forEach(function(q,i){
-    if(q.section!==lastSection){
-      lastSection=q.section;
-      var sectionTitle='';
-      if(q.section==='Lý thuyết ngữ pháp') sectionTitle='PHẦN 1: LÝ THUYẾT NGỮ PHÁP (10 câu)';
-      else if(q.section==='Chia động từ') sectionTitle='PHẦN 2: CHỌN DẠNG ĐÚNG CỦA ĐỘNG TỪ (15 câu)';
-      else if(q.section==='Từ vựng') sectionTitle='PHẦN 3: TỪ VỰNG (10 câu)';
-      html+='<div style="margin:28px 0 16px;padding:12px 16px;background:linear-gradient(135deg,#312e81,#4c1d95);border-radius:12px;font-weight:700;font-size:.95rem">'+sectionTitle+'</div>';
-    }
-
-    var letters=['A','B','C','D'];
-    html+='<div class="question-card" id="qc-'+i+'">'
-      +'<span class="q-num">Câu '+(i+1)+'</span>'
-      +'<span class="q-section">'+q.section+'</span>'
-      +'<div class="q-text">'+q.q+'</div>'
-      +'<div class="options">';
-    q.opts.forEach(function(o,j){
-      html+='<div class="opt" id="opt-'+i+'-'+j+'" onclick="selectAnswer('+i+','+j+')">'
-        +'<div class="opt-letter">'+letters[j]+'</div>'
-        +'<div class="opt-text">'+o+'</div></div>';
-    });
-    html+='</div>'
-      +'<div class="explanation" id="exp-'+i+'">'+q.exp+'</div>'
-      +'</div>';
-  });
-  document.getElementById('questions').innerHTML=html;
+function select(q,el,ans){
+const opts=el.parentElement.querySelectorAll('.option');
+opts.forEach(o=>o.classList.remove('selected'));
+el.classList.add('selected');
+selected[q]=ans;
+document.getElementById('progress').textContent=`Đã trả lời: ${Object.keys(selected).length}/40`;
 }
-
-function selectAnswer(qi,oi){
-  if(!testStarted) return;
-  for(var j=0;j<4;j++){
-    var el=document.getElementById('opt-'+qi+'-'+j);
-    if(el) el.classList.remove('selected');
-  }
-  document.getElementById('opt-'+qi+'-'+oi).classList.add('selected');
-  document.getElementById('qc-'+qi).classList.add('answered');
-  answers[qi]=oi;
-  updateProgress();
+function submitQuiz(){
+clearInterval(timerInterval);
+let correct=0,theoryCorrect=0,passiveCorrect=0,vocabCorrect=0;
+for(let i=1;i<=40;i++){
+const q=document.getElementById('q'+i);
+const opts=q.querySelectorAll('.option');
+const exp=q.querySelector('.explanation');
+exp.style.display='block';
+opts.forEach(o=>{
+o.style.pointerEvents='none';
+const letter=o.textContent.trim().charAt(0);
+if(letter===answers[i])o.classList.add('correct');
+if(selected[i]===letter&&letter!==answers[i])o.classList.add('wrong');
+});
+if(selected[i]===answers[i]){
+correct++;
+if(i<=14)theoryCorrect++;
+else if(i<=28)passiveCorrect++;
+else vocabCorrect++;
 }
-
-function updateProgress(){
-  var answered=answers.filter(function(a){return a>=0}).length;
-  var pct=Math.round(answered/QUESTIONS.length*100);
-  document.getElementById('prog-fill').style.width=pct+'%';
-  document.getElementById('prog-text').textContent=answered+'/'+QUESTIONS.length+' câu đã trả lời';
 }
-
-function startTimer(){
-  timerInterval=setInterval(function(){
-    timeLeft--;
-    if(timeLeft<=0){clearInterval(timerInterval);submitTest();return}
-    var m=Math.floor(timeLeft/60);
-    var s=timeLeft%60;
-    document.getElementById('timer').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-    if(timeLeft<=300) document.getElementById('timer-box').classList.add('warn');
-  },1000);
-}
-
-function submitTest(){
-  if(!testStarted) return;
-  var unanswered=answers.filter(function(a){return a<0}).length;
-  if(unanswered>0 && timeLeft>0){
-    if(!confirm('Bạn còn '+unanswered+' câu chưa trả lời. Nộp bài?')) return;
-  }
-  clearInterval(timerInterval);
-  testStarted=false;
-
-  var correct=0,wrong=0,skipped=0;
-  QUESTIONS.forEach(function(q,i){
-    var card=document.getElementById('qc-'+i);
-    if(answers[i]<0){skipped++;return}
-    if(answers[i]===q.ans){
-      correct++;
-      card.classList.add('correct','show-exp');
-      document.getElementById('opt-'+i+'-'+q.ans).classList.add('correct-answer');
-    } else {
-      wrong++;
-      card.classList.add('wrong','show-exp');
-      document.getElementById('opt-'+i+'-'+answers[i]).classList.add('wrong-answer');
-      document.getElementById('opt-'+i+'-'+q.ans).classList.add('correct-answer');
-    }
-    for(var j=0;j<4;j++){
-      var el=document.getElementById('opt-'+i+'-'+j);
-      if(el) el.setAttribute('disabled','true');
-      el.style.pointerEvents='none';
-    }
-  });
-
-  var score=(correct/QUESTIONS.length*10).toFixed(1);
-  var timeUsed=30*60-timeLeft;
-  var mUsed=Math.floor(timeUsed/60);
-  var sUsed=timeUsed%60;
-  var grade=score>=8?'excellent':score>=5?'good':'fail';
-
-  var resultHTML='<div class="result-screen">'
-    +'<h2 style="font-size:1.5rem;margin-bottom:16px">Kết quả bài test</h2>'
-    +'<div class="score-circle '+grade+'">'
-    +'<div class="score-num">'+score+'</div>'
-    +'<div class="score-label">/ 10 điểm</div></div>'
-    +'<p style="font-size:1.1rem;margin-bottom:4px">'+studentName+(studentClass?' — '+studentClass:'')+'</p>'
-    +'<p style="color:#94a3b8;font-size:.85rem">Thời gian: '+mUsed+' phút '+sUsed+' giây</p>'
-    +'<div class="result-stats">'
-    +'<div class="stat green"><div class="val">'+correct+'</div><div class="lbl">Đúng</div></div>'
-    +'<div class="stat red"><div class="val">'+wrong+'</div><div class="lbl">Sai</div></div>'
-    +'<div class="stat blue"><div class="val">'+skipped+'</div><div class="lbl">Bỏ qua</div></div>'
-    +'</div>'
-    +'<button class="btn-review" onclick="scrollToReview()">Xem lại bài làm ↓</button>'
-    +'</div>';
-  document.getElementById('s-result').innerHTML=resultHTML;
-  document.getElementById('s-result').classList.remove('hidden');
-  document.getElementById('btn-submit').classList.add('hidden');
-
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function scrollToReview(){
-  document.getElementById('questions').scrollIntoView({behavior:'smooth'});
+const pct=Math.round(correct/40*100);
+let grade,gc;
+if(pct>=90){grade='Xuất sắc!';gc='grade-a'}
+else if(pct>=75){grade='Tốt!';gc='grade-b'}
+else if(pct>=60){grade='Khá';gc='grade-c'}
+else{grade='Cần cố gắng thêm';gc='grade-d'}
+const used=45*60-timeLeft;
+const um=Math.floor(used/60),us=used%60;
+const name=document.getElementById('studentName').value.trim();
+document.getElementById('resultArea').innerHTML=`
+<div class="result-box">
+<h2 style="color:#ffd700">Kết quả</h2>
+<div class="score">${correct}/40</div>
+<div class="score-detail">${pct}% — Thời gian: ${um} phút ${us} giây</div>
+<div class="grade ${gc}">${grade}</div>
+<div style="margin-top:16px;text-align:left;padding:0 20px">
+<p>📚 Lý thuyết các thì: <strong>${theoryCorrect}/14</strong></p>
+<p>🔄 Câu bị động: <strong>${passiveCorrect}/14</strong></p>
+<p>📖 Từ vựng: <strong>${vocabCorrect}/12</strong></p>
+</div>
+</div>`;
+document.getElementById('resultArea').classList.remove('hidden');
+document.querySelector('.btn-submit').classList.add('hidden');
+window.scrollTo({top:0,behavior:'smooth'});
+// Send to GAS
+try{
+fetch('https://script.google.com/macros/s/AKfycbytpp6i9m40Dk1twHuFA7UeVYcOmEdKAIGsHolockRoHvF8rdeRok-YG_AFBUpaj5Fm6g/exec',{
+method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+body:JSON.stringify({name:name,score:correct,total:40,percent:pct,time:um+'p'+us+'s',quiz:'Day15-Full-40cau',detail:`Thì:${theoryCorrect}/14|Bịđộng:${passiveCorrect}/14|Từvựng:${vocabCorrect}/12`})
+});
+}catch(e){}
 }
 </script>
 </body>
-</html>
+                           </html>
